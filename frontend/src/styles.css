@@ -336,6 +336,23 @@ button {
 .list.sortlist > li {
   cursor: "load";
 }
+.sortlist {
+  max-height: 100px;
+  overflow: auto;
+  padding: 0;
+}
+.sortlist > li {
+  cursor: pointer;
+  border-bottom: 1px solid #e2e2e2;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  position: relative;
+  padding: 0 0 0 0.3em;
+}
+.sortlist > li:hover {
+  background: #e2e2e2;
+}
 
 /*----------recommended---------------------*/
 .recommends {

@@ -6,7 +6,7 @@ export default function Sort({ setshowsort }) {
   return (
     <>
       <div className="sortblock">
-        <ul class="list sortlist">
+        <ul class="sortlist">
           <li>
             <input
               type="radio"

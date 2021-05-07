@@ -22,7 +22,6 @@ export default function Liked() {
       .map((item) => {
         return (
           <>
-            {" "}
             <div className="likedlist-card">
               <Link to={`/${item.id}`}>
                 <div className="likedlist-card-data">
@@ -66,6 +65,7 @@ export default function Liked() {
       <Navbar />
 
       <Navigator value="liked" />
+      <h6>Liked Videos</h6>
       <div className="wrapper">
         {Likedlist().length === 0 ? (
           <div

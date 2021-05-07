@@ -68,6 +68,7 @@ export default function History() {
     <>
       <Navbar />
       <Navigator value="history" />
+      <h6>History</h6>
       <div className="wrapper">
         {History().length === 0 ? (
           <div
