@@ -4,7 +4,7 @@ import { getSortedData, getFilteredData } from "../App";
 import Navigator from "../Navigator";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
-
+import axios from "axios";
 import { Navbar } from "../Navbar";
 
 export default function History() {
@@ -20,6 +20,33 @@ export default function History() {
   console.log("filtered", filteredData);
 
   function History() {
+    async function history_video_add_call(url, payload) {
+      try {
+        let response = await axios.post(url, payload);
+        if (response.status === 200) {
+          dispatch({
+            type: "ADD_TO_HISTORY",
+            payload: payload.historyobj
+          });
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    }
+    async function history_video_delete_call(url, payload) {
+      try {
+        let response = await axios.delete(url, { data: payload });
+        if (response.status === 200) {
+          dispatch({
+            type: "REMOVE_FROM_HISTORY",
+            payload: payload.historyid
+          });
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    }
+
     return filteredData
       .filter((item) => item.ishistory !== false)
       .map((item) => {
@@ -32,14 +59,16 @@ export default function History() {
                   <img
                     src={`https://i.ytimg.com/vi/${item.id}/mqdefault.jpg`}
                     onClick={() => {
-                      dispatch({
-                        type: "ADD_TO_HISTORY",
-                        payload: {
-                          ...item,
-                          ishistory: true,
-                          lastseen: new Date()
+                      history_video_add_call(
+                        "https://videolib-demo.utpalpati.repl.co/history/",
+                        {
+                          historyobj: {
+                            ...item,
+                            ishistory: true,
+                            lastseen: new Date()
+                          }
                         }
-                      });
+                      );
                     }}
                     alt=""
                   />
@@ -52,9 +81,12 @@ export default function History() {
               </Link>
               <button
                 class="icon-button lg"
-                onClick={() =>
-                  dispatch({ type: "REMOVE_FROM_HISTORY", payload: item.id })
-                }
+                onClick={() => {
+                  history_video_delete_call(
+                    "https://videolib-demo.utpalpati.repl.co/history/",
+                    { historyid: item.id }
+                  );
+                }}
               >
                 <i class="fas fa-trash-alt"></i>
               </button>

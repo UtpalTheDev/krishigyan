@@ -1,5 +1,12 @@
-import { createContext, useContext, useReducer, useState } from "react";
+import {
+  createContext,
+  useContext,
+  useReducer,
+  useState,
+  useEffect
+} from "react";
 import faker from "faker";
+import axios from "axios";
 
 import { datas } from "./Datas";
 
@@ -141,6 +148,46 @@ export function ReducerProvider({ children }) {
     showDuration: 0,
     showCategory: []
   });
+
+  useEffect(() => {
+    (async function () {
+      //const { data } = await axios.get("/api/products");
+      // const { data } = await axios.get(
+      //   "https://ecomm-demo.utpalpati.repl.co/product"
+      // );
+      // console.log("product data", data);
+
+      const playlist = await axios.get(
+        "https://videolib-demo.utpalpati.repl.co/playlist/"
+      );
+      console.log("playlist coming", playlist);
+      const history = await axios.get(
+        "https://videolib-demo.utpalpati.repl.co/history/"
+      );
+      console.log("history coming", history);
+      const liked = await axios.get(
+        "https://videolib-demo.utpalpati.repl.co/liked/"
+      );
+      console.log("liked coming", liked);
+      dispatch({
+        type: "LOAD_PLAYLIST",
+        payload: playlist.data.playlistdata
+      });
+      dispatch({
+        type: "LOAD_HISTORY",
+        payload: history.data.historydata
+      });
+      dispatch({
+        type: "LOAD_LIKEDLIST",
+        payload: liked.data.likeddata
+      });
+      // dispatch({
+      //   type: "LOAD_WISHLIST",
+      //   payload: wishlist.data.items
+      // });
+      // setdata(data);
+    })();
+  }, []);
   return (
     <>
       <Reducercontext.Provider
@@ -177,7 +224,12 @@ function reduce(state, action) {
 
     case "SORT":
       return { ...state, sortBy: action.payload };
-
+    case "LOAD_PLAYLIST":
+      return { ...state, playlist: action.payload };
+    case "LOAD_HISTORY":
+      return { ...state, history: action.payload };
+    case "LOAD_LIKEDLIST":
+      return { ...state, likedlist: action.payload };
     case "FILTERCATEGORY":
       if (state.showCategory.includes(action.payload)) {
         return {

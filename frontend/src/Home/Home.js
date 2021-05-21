@@ -2,7 +2,7 @@ import { useReduce } from "../Reducer-context";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import { Navbar } from "../Navbar";
-
+import axios from "axios";
 import { getSortedData, getFilteredData } from "../App";
 import Navigator from "../Navigator";
 
@@ -18,6 +18,20 @@ export default function Home() {
   let filteredData = getFilteredData(sortedData, { showCategory });
   console.log("filtered", filteredData);
 
+  async function history_video_add_call(url, payload) {
+    try {
+      let response = await axios.post(url, payload);
+      if (response.status === 200) {
+        dispatch({
+          type: "ADD_TO_HISTORY",
+          payload: payload.historyobj
+        });
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
   return (
     <>
       <Navigator value="home" />
@@ -32,14 +46,16 @@ export default function Home() {
                     <img
                       src={`https://i.ytimg.com/vi/${item.id}/mqdefault.jpg`}
                       onClick={() => {
-                        dispatch({
-                          type: "ADD_TO_HISTORY",
-                          payload: {
-                            ...item,
-                            ishistory: true,
-                            lastseen: new Date()
+                        history_video_add_call(
+                          "https://videolib-demo.utpalpati.repl.co/history/",
+                          {
+                            historyobj: {
+                              ...item,
+                              ishistory: true,
+                              lastseen: new Date()
+                            }
                           }
-                        });
+                        );
                       }}
                       alt="f"
                     />

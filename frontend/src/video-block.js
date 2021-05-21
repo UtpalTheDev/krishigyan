@@ -4,7 +4,7 @@ import { useParams, Link } from "react-router-dom";
 import { v4 as uuid } from "uuid";
 import { Navbar } from "./Navbar";
 import Navigator from "./Navigator";
-
+import axios from "axios";
 export default function VideoBlock() {
   //console.log(routepath);
   let { videoId } = useParams();
@@ -24,7 +24,10 @@ export default function VideoBlock() {
             <button
               class="icon-button md"
               onClick={() =>
-                dispatch({ type: "REMOVE_FROM_LIKEDLIST", payload: item.id })
+                liked_video_delete_call(
+                  "https://videolib-demo.utpalpati.repl.co/liked/",
+                  { likedid: item.id }
+                )
               }
             >
               <span class="material-icons">thumb_up</span>Unlike
@@ -35,18 +38,56 @@ export default function VideoBlock() {
       },
       <button
         class="icon-button md"
-        onClick={() =>
-          dispatch({
-            type: "ADD_TO_LIKEDLIST",
-            payload: { ...itempassed, islike: true }
-          })
-        }
+        onClick={() => {
+          liked_video_add_call(
+            "https://videolib-demo.utpalpati.repl.co/liked/",
+            { likedobj: { ...itempassed, islike: true } }
+          );
+        }}
       >
         <span class="material-icons">thumb_up_off_alt</span>Like
       </button>
     );
   }
-
+  async function liked_video_add_call(url, payload) {
+    try {
+      let response = await axios.post(url, payload);
+      if (response.status === 200) {
+        dispatch({
+          type: "ADD_TO_LIKEDLIST",
+          payload: payload.likedobj
+        });
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }
+  async function liked_video_delete_call(url, payload) {
+    try {
+      let response = await axios.delete(url, { data: payload });
+      if (response.status === 200) {
+        dispatch({
+          type: "REMOVE_FROM_LIKEDLIST",
+          payload: payload.likedid
+        });
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }
+  async function history_video_add_call(url, payload) {
+    try {
+      let response = await axios.post(url, payload);
+      if (response.status === 200) {
+        dispatch({
+          type: "ADD_TO_HISTORY",
+          payload: payload.historyobj
+        });
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }
   return (
     <>
       <Navbar />
@@ -101,14 +142,16 @@ export default function VideoBlock() {
                         <img
                           src={`https://i.ytimg.com/vi/${item.id}/mqdefault.jpg`}
                           onClick={() => {
-                            dispatch({
-                              type: "ADD_TO_HISTORY",
-                              payload: {
-                                ...item,
-                                ishistory: true,
-                                lastseen: new Date()
+                            history_video_add_call(
+                              "https://videolib-demo.utpalpati.repl.co/history/",
+                              {
+                                historyobj: {
+                                  ...item,
+                                  ishistory: true,
+                                  lastseen: new Date()
+                                }
                               }
-                            });
+                            );
                           }}
                           alt="f"
                         />
@@ -135,6 +178,33 @@ function PlaylistModal({ setshowmodal, videoId }) {
   const [showinput, setshowinput] = useState(false);
 
   let { dispatch, playlist } = useReduce();
+
+  async function playlist_add_call(url, payload) {
+    try {
+      let response = await axios.post(url, payload);
+      if (response.status === 200) {
+        dispatch({
+          type: "NEW_PLAYLIST",
+          payload: payload.playlistobj
+        });
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }
+  async function playlist_video_add_call(url, payload) {
+    try {
+      let response = await axios.post(url, payload);
+      if (response.status === 200) {
+        dispatch({
+          type: "ADD_TO_PLAYLIST",
+          payload: payload
+        });
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }
   return (
     <>
       <div className="playlistmodal">
@@ -155,13 +225,13 @@ function PlaylistModal({ setshowmodal, videoId }) {
                 <>
                   <li
                     onClick={() => {
-                      dispatch({
-                        type: "ADD_TO_PLAYLIST",
-                        payload: {
+                      playlist_video_add_call(
+                        "https://videolib-demo.utpalpati.repl.co/playlist/video",
+                        {
                           videoid: videoId,
                           playlistid: item.id
                         }
-                      });
+                      );
                       setshowmodal((prev) => !prev);
                     }}
                   >
@@ -211,10 +281,16 @@ function PlaylistModal({ setshowmodal, videoId }) {
                 onClick={() => {
                   setshowinput(false);
                   newplaylist !== ""
-                    ? dispatch({
-                        type: "NEW_PLAYLIST",
-                        payload: { id: uuid(), name: newplaylist, videos: [] }
-                      })
+                    ? playlist_add_call(
+                        "https://videolib-demo.utpalpati.repl.co/playlist/",
+                        {
+                          playlistobj: {
+                            id: uuid(),
+                            name: newplaylist,
+                            videos: []
+                          }
+                        }
+                      )
                     : console.log("blank");
                   setnewplaylist("");
                 }}

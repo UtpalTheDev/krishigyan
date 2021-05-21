@@ -4,6 +4,7 @@ import { getSortedData, getFilteredData } from "../App";
 import Navigator from "../Navigator";
 import { Link } from "react-router-dom";
 import { Navbar } from "../Navbar";
+import axios from "axios";
 
 export default function Playlist() {
   // useEffect(() => {
@@ -60,13 +61,13 @@ export default function Playlist() {
             <button
               class="icon-button lg"
               onClick={() => {
-                dispatch({
-                  type: "REMOVE_FROM_PLAYLIST",
-                  payload: {
+                playlist_video_delete_call(
+                  "https://videolib-demo.utpalpati.repl.co/playlist/video/",
+                  {
                     playlistid: playlist[currentplaylist].id,
                     videoid: item.id
                   }
-                });
+                );
               }}
             >
               <i class="fas fa-times"></i>
@@ -95,6 +96,32 @@ export default function Playlist() {
       return prev;
     });
   }
+  async function playlist_video_delete_call(url, payload) {
+    try {
+      let response = await axios.delete(url, { data: payload });
+      if (response.status === 200) {
+        dispatch({
+          type: "REMOVE_FROM_PLAYLIST",
+          payload: payload
+        });
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }
+  async function playlist_delete_call(url, payload) {
+    try {
+      let response = await axios.delete(url, { data: payload });
+      if (response.status === 200) {
+        dispatch({
+          type: "REMOVE_PLAYLIST",
+          payload: payload.playlistid
+        });
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }
   return (
     <>
       <Navbar />
@@ -119,7 +146,11 @@ export default function Playlist() {
                     class="icon-button md"
                     onClick={() => {
                       Removeandupdate(index);
-                      dispatch({ type: "REMOVE_PLAYLIST", payload: item.id });
+
+                      playlist_delete_call(
+                        "https://videolib-demo.utpalpati.repl.co/playlist/",
+                        { playlistid: item.id }
+                      );
                     }}
                   >
                     <i class="fas fa-times"></i>
