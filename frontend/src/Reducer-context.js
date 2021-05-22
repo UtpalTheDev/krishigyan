@@ -140,7 +140,7 @@ export function ReducerProvider({ children }) {
   ] = useReducer(reduce, {
     route: "home",
     playlist: [],
-    data: datas,
+    data: [],
 
     history: [],
     likedlist: [],
@@ -169,6 +169,15 @@ export function ReducerProvider({ children }) {
         "https://videolib-demo.utpalpati.repl.co/liked/"
       );
       console.log("liked coming", liked);
+      const videodata = await axios.get(
+        "https://videolib-demo.utpalpati.repl.co/video/"
+      );
+      console.log("data coming", data);
+              
+      dispatch({
+        type: "LOAD_VIDEODATA",
+        payload: videodata.data
+      });  
       dispatch({
         type: "LOAD_PLAYLIST",
         payload: playlist.data.playlistdata
@@ -224,6 +233,8 @@ function reduce(state, action) {
 
     case "SORT":
       return { ...state, sortBy: action.payload };
+      case "LOAD_VIDEODATA":
+        return { ...state, data: action.payload };      
     case "LOAD_PLAYLIST":
       return { ...state, playlist: action.payload };
     case "LOAD_HISTORY":
