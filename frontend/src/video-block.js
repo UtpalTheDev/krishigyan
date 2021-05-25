@@ -41,7 +41,7 @@ export default function VideoBlock() {
         onClick={() => {
           liked_video_add_call(
             "https://videolib-demo.utpalpati.repl.co/liked/",
-            { likedobj: { ...itempassed, islike: true } }
+            { likedId: itempassed.id }
           );
         }}
       >
@@ -55,7 +55,7 @@ export default function VideoBlock() {
       if (response.status === 200) {
         dispatch({
           type: "ADD_TO_LIKEDLIST",
-          payload: payload.likedobj
+          payload: payload.likedId
         });
       }
     } catch (err) {
@@ -68,7 +68,7 @@ export default function VideoBlock() {
       if (response.status === 200) {
         dispatch({
           type: "REMOVE_FROM_LIKEDLIST",
-          payload: payload.likedid
+          payload: payload.likedId
         });
       }
     } catch (err) {

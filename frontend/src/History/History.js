@@ -120,7 +120,3 @@ export default function History() {
     </>
   );
 }
-
-/*              {`${item.lastseen.getDate()}/${
-                item.lastseen.getMonth() + 1
-              }/${item.lastseen.getFullYear()} At: ${item.lastseen.getHours()}:${item.lastseen.getMinutes()}`}*/
