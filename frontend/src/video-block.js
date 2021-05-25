@@ -19,14 +19,14 @@ export default function VideoBlock() {
   function Like_button(itempassed) {
     return likedlist.reduce(
       (defaultbutton, item) => {
-        if (item.id === itempassed.id && item.islike !== false) {
+        if (item === itempassed.id) {
           return (
             <button
               class="icon-button md"
               onClick={() =>
                 liked_video_delete_call(
                   "https://videolib-demo.utpalpati.repl.co/liked/",
-                  { likedid: item.id }
+                  { likedId: item }
                 )
               }
             >

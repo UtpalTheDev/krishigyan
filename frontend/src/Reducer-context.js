@@ -244,35 +244,12 @@ function reduce(state, action) {
       };
 
     case "ADD_TO_LIKEDLIST":
-      let findliked = state.likedlist.find(
-        (item) => item.id === action.payload.id
-      );
-      if (findliked) {
-        let likednewarr = state.likedlist.map((item) => {
-          if (item.id === action.payload.id) {
-            return {
-              ...item,
-              islike: action.payload.islike
-            };
-          }
-          return item;
-        });
-        console.log("add to history", likednewarr);
-
-        return { ...state, likedlist: likednewarr };
-      } else {
-        return { ...state, likedlist: [...state.likedlist, action.payload] };
-      }
+      return { ...state, likedlist: [...state.likedlist, action.payload] };
 
     case "REMOVE_FROM_LIKEDLIST":
       return {
         ...state,
-        likedlist: state.likedlist.map((item) => {
-          if (item.id === action.payload) {
-            return { ...item, islike: !item.islike };
-          }
-          return item;
-        })
+        likedlist: state.likedlist.filter((item) => item !== action.payload)
       };
     default:
       return console.log("error");

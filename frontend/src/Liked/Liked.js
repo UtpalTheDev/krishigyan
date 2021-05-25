@@ -12,7 +12,7 @@ export default function Liked() {
   let { likedlist, dispatch, sortBy, showCategory, data } = useReduce();
 
   const likeddata = likedlist.map((eachitem) => {
-    let finddata = data.find((item) => item._id === eachitem.likedId);
+    let finddata = data.find((item) => item.id === eachitem);
     if (finddata) {
       return finddata;
     }
