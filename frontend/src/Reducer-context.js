@@ -211,12 +211,12 @@ function reduce(state, action) {
 
     case "ADD_TO_HISTORY":
       let findhistory = state.history.find(
-        (item) => item.id === action.payload.historyId
+        (item) => item.historyId === action.payload.historyId
       );
       console.log("add to history", findhistory);
       if (findhistory) {
         let historynewarr = state.history.map((item) => {
-          if (item.id === action.payload.historyid) {
+          if (item.historyId === action.payload.historyId) {
             return {
               ...item,
               lastseen: action.payload.lastseen
@@ -224,7 +224,7 @@ function reduce(state, action) {
           }
           return item;
         });
-        console.log("add to history", historynewarr);
+        console.log("add to history", { ...state, history: historynewarr });
 
         return { ...state, history: historynewarr };
       } else {
@@ -234,12 +234,8 @@ function reduce(state, action) {
     case "REMOVE_FROM_HISTORY":
       return {
         ...state,
-        history: state.history.map((item) => {
-          if (item.id === action.payload) {
-            return { ...item, ishistory: !item.ishistory };
-          }
-          return item;
-        })
+        history: state.history.filter((item) =>item.historyId!==action.payload.historyId
+        )
       };
 
     case "ADD_TO_LIKEDLIST":

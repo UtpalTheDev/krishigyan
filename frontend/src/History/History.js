@@ -44,10 +44,11 @@ export default function History() {
     async function history_video_delete_call(url, payload) {
       try {
         let response = await axios.delete(url, { data: payload });
+        console.log(response);
         if (response.status === 200) {
           dispatch({
             type: "REMOVE_FROM_HISTORY",
-            payload: payload.historyId
+            payload: payload
           });
         }
       } catch (err) {
