@@ -24,7 +24,7 @@ export default function Home() {
       if (response.status === 200) {
         dispatch({
           type: "ADD_TO_HISTORY",
-          payload: payload.historyobj
+          payload: payload
         });
       }
     } catch (err) {
@@ -49,11 +49,8 @@ export default function Home() {
                         history_video_add_call(
                           "https://videolib-demo.utpalpati.repl.co/history/",
                           {
-                            historyobj: {
-                              ...item,
-                              ishistory: true,
-                              lastseen: new Date()
-                            }
+                            historyId: item.id,
+                            lastseen: new Date()
                           }
                         );
                       }}

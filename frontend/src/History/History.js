@@ -11,10 +11,18 @@ export default function History() {
   useEffect(() => {
     dispatch({ type: "CLEAR_FILTER" });
   }, []);
-  const { history, dispatch, sortBy, showCategory } = useReduce();
+  const { history, dispatch, sortBy, data, showCategory } = useReduce();
   console.log("history", history);
 
-  let sortedData = getSortedData(history, sortBy);
+  const historydata = history.map((eachitem) => {
+    let finddata = data.find((item) => item.id === eachitem.historyId);
+    if (finddata) {
+      return { ...finddata, lastseen: eachitem.lastseen };
+    }
+    return {};
+  });
+
+  let sortedData = getSortedData(historydata, sortBy);
   console.log("sorted", sortedData);
   let filteredData = getFilteredData(sortedData, { showCategory });
   console.log("filtered", filteredData);
@@ -26,7 +34,7 @@ export default function History() {
         if (response.status === 200) {
           dispatch({
             type: "ADD_TO_HISTORY",
-            payload: payload.historyobj
+            payload: payload
           });
         }
       } catch (err) {
@@ -39,7 +47,7 @@ export default function History() {
         if (response.status === 200) {
           dispatch({
             type: "REMOVE_FROM_HISTORY",
-            payload: payload.historyid
+            payload: payload.historyId
           });
         }
       } catch (err) {
@@ -62,11 +70,8 @@ export default function History() {
                       history_video_add_call(
                         "https://videolib-demo.utpalpati.repl.co/history/",
                         {
-                          historyobj: {
-                            ...item,
-                            ishistory: true,
-                            lastseen: new Date()
-                          }
+                          historyId: item.id,
+                          lastseen: new Date()
                         }
                       );
                     }}
@@ -84,7 +89,7 @@ export default function History() {
                 onClick={() => {
                   history_video_delete_call(
                     "https://videolib-demo.utpalpati.repl.co/history/",
-                    { historyid: item.id }
+                    { historyId: item.id }
                   );
                 }}
               >

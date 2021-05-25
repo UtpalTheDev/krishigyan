@@ -211,15 +211,14 @@ function reduce(state, action) {
 
     case "ADD_TO_HISTORY":
       let findhistory = state.history.find(
-        (item) => item.id === action.payload.id
+        (item) => item.id === action.payload.historyId
       );
       console.log("add to history", findhistory);
       if (findhistory) {
         let historynewarr = state.history.map((item) => {
-          if (item.id === action.payload.id) {
+          if (item.id === action.payload.historyid) {
             return {
               ...item,
-              ishistory: action.payload.ishistory,
               lastseen: action.payload.lastseen
             };
           }
