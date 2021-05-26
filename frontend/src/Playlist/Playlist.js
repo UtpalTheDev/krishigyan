@@ -47,8 +47,7 @@ export default function Playlist() {
                     dispatch({
                       type: "ADD_TO_HISTORY",
                       payload: {
-                        ...item,
-                        ishistory: true,
+                        historyId: item.id,
                         lastseen: new Date()
                       }
                     });
@@ -138,7 +137,7 @@ export default function Playlist() {
               <>
                 <li
                   style={{
-                    background: currentplaylist.id === item.id ? "#f2f2f2" : ""
+                    background: currentplaylist === index ? "#f2f2f2" : ""
                   }}
                 >
                   <div onClick={() => setplaylist(index)}>{item.name}</div>

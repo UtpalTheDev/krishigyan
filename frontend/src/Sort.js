@@ -8,40 +8,52 @@ export default function Sort({ setshowsort }) {
       <div className="sortblock">
         <ul class="sortlist">
           <li>
-            <input
-              type="radio"
-              name="sort"
-              checked={sortBy === null}
+            <div
+              style={{
+                width: "100%",
+                textAlign: "center",
+                padding: "0.3rem 0",
+                background: sortBy === null ? "lightgrey" : ""
+              }}
               onClick={() => {
                 dispatch({ type: "SORT", payload: null });
                 setshowsort((prev) => !prev);
               }}
-            />
-            Relevance
+            >
+              Relevance
+            </div>
           </li>
           <li>
-            <input
-              type="radio"
-              name="sort"
-              checked={sortBy === "Newest First"}
+            <div
+              style={{
+                width: "100%",
+                textAlign: "center",
+                padding: "0.3rem 0",
+                background: sortBy === "Newest First" ? "lightgrey" : ""
+              }}
               onClick={() => {
                 dispatch({ type: "SORT", payload: "Newest First" });
                 setshowsort((prev) => !prev);
               }}
-            />
-            Oldest First
+            >
+              Newest First
+            </div>
           </li>
           <li>
-            <input
-              type="radio"
-              name="sort"
-              checked={sortBy === "Oldest First"}
+            <div
+              style={{
+                width: "100%",
+                textAlign: "center",
+                padding: "0.3rem 0",
+                background: sortBy === "Oldest First" ? "lightgrey" : ""
+              }}
               onClick={() => {
                 dispatch({ type: "SORT", payload: "Oldest First" });
                 setshowsort((prev) => !prev);
               }}
-            />
-            Newest First
+            >
+              Oldest First
+            </div>
           </li>
         </ul>
       </div>

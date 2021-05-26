@@ -36,13 +36,13 @@ export default function App() {
 }
 
 export function getSortedData(videolist, sortBy) {
-  if (sortBy === "Newest First") {
+  if (sortBy === "Oldest First") {
     console.log("l");
     return [...videolist].sort(
       (a, b) => new Date(a.dateofpublish) - new Date(b.dateofpublish)
     );
   }
-  if (sortBy === "Oldest First") {
+  if (sortBy === "Newest First") {
     console.log("l");
     return [...videolist].sort(
       (a, b) => new Date(b.dateofpublish) - new Date(a.dateofpublish)

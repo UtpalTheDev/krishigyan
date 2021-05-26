@@ -1,12 +1,14 @@
 import logo from "./assets/logo.svg";
+import { Link } from "react-router-dom";
+
 export function Navbar() {
   return (
     <>
       <div className="videonavbar">
-        <div className="videonavbar-logo">
+        <Link to="/" className="videonavbar-logo">
           <img src={logo} alt="logo" />
           <span>K</span>rishiGyan
-        </div>
+        </Link>
         <div className="videonavbar-search">
           <input type="text" placeholder="Search.."></input>
           <span class="material-icons">search</span>
