@@ -64,18 +64,20 @@ export default function History() {
             {" "}
             <div class="history-card">
               <Link to={`/${item.id}`}>
-                <div class="history-card-data">
+                <div
+                  class="history-card-data"
+                  onClick={() => {
+                    history_video_add_call(
+                      "https://videolib-demo.utpalpati.repl.co/history/",
+                      {
+                        historyId: item.id,
+                        lastseen: new Date()
+                      }
+                    );
+                  }}
+                >
                   <img
                     src={`https://i.ytimg.com/vi/${item.id}/mqdefault.jpg`}
-                    onClick={() => {
-                      history_video_add_call(
-                        "https://videolib-demo.utpalpati.repl.co/history/",
-                        {
-                          historyId: item.id,
-                          lastseen: new Date()
-                        }
-                      );
-                    }}
                     alt=""
                   />
                   <div className="history-card-desc">{item.title}</div>
@@ -107,7 +109,7 @@ export default function History() {
       <Navbar />
       <Navigator value="history" />
 
-      <div className="wrapper">
+      <div className="wrapper historywrapper">
         <h6>History</h6>
         {History().length === 0 ? (
           <div

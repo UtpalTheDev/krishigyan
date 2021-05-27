@@ -40,18 +40,20 @@ export default function Playlist() {
           <div className="playlist-card">
             <Link to={`/${item.id}`}>
               {" "}
-              <div className="playlist-card-data">
+              <div
+                className="playlist-card-data"
+                onClick={() => {
+                  dispatch({
+                    type: "ADD_TO_HISTORY",
+                    payload: {
+                      historyId: item.id,
+                      lastseen: new Date()
+                    }
+                  });
+                }}
+              >
                 <img
                   src={`https://i.ytimg.com/vi/${item.id}/mqdefault.jpg`}
-                  onClick={() => {
-                    dispatch({
-                      type: "ADD_TO_HISTORY",
-                      payload: {
-                        historyId: item.id,
-                        lastseen: new Date()
-                      }
-                    });
-                  }}
                   alt=""
                 />
                 <div className="playlist-card-desc">{item.title}</div>

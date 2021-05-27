@@ -41,19 +41,20 @@ export default function Home() {
           return (
             <>
               <Link to={`${item.id}`}>
-                <div>
+                <div
+                  onClick={() => {
+                    history_video_add_call(
+                      "https://videolib-demo.utpalpati.repl.co/history/",
+                      {
+                        historyId: item.id,
+                        lastseen: new Date()
+                      }
+                    );
+                  }}
+                >
                   <div className="image-wrapper">
                     <img
                       src={`https://i.ytimg.com/vi/${item.id}/mqdefault.jpg`}
-                      onClick={() => {
-                        history_video_add_call(
-                          "https://videolib-demo.utpalpati.repl.co/history/",
-                          {
-                            historyId: item.id,
-                            lastseen: new Date()
-                          }
-                        );
-                      }}
                       alt="f"
                     />
                     <div className="videos-duration md">

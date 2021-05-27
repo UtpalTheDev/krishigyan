@@ -7,6 +7,14 @@ a {
   text-decoration: none;
   color: inherit;
 }
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  padding-left: 0.2rem;
+}
 
 /*----------------videoblock----------------*/
 .playlistmodal {
@@ -229,7 +237,7 @@ button {
 }
 .watchedbefore {
   position: absolute;
-  right: 0;
+  right: 1%;
   bottom: 0;
 }
 
@@ -330,7 +338,7 @@ button {
 .sortblock {
   position: fixed;
   bottom: 0;
-  height: 25vh;
+  height: max-content;
   width: 100%;
   background: white;
 }
@@ -349,7 +357,6 @@ button {
   justify-content: start;
   align-items: center;
   position: relative;
-  padding: 0 0 0 0.3em;
 }
 .sortlist > li:hover {
   background: #e2e2e2;
@@ -472,6 +479,12 @@ button {
   }
   .playlistitem {
     height: 42vh;
+  }
+  .historywrapper > div:last-child {
+    margin-bottom: 5rem;
+  }
+  .likedwrapper > div:last-child {
+    margin-bottom: 5rem;
   }
 }
 
