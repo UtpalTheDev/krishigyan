@@ -1,25 +1,21 @@
 import { useReduce } from "./Reducer-context";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { v4 as uuid } from "uuid";
 import { Navbar } from "./Navbar";
-import Navigator from "./Navigator";
 import axios from "axios";
 
 export default function VideoBlock() {
-  //console.log(routepath);
   let { videoId } = useParams();
 
   const [showmodal, setshowmodal] = useState(false);
 
-  const { data, dispatch, playlist, likedlist } = useReduce();
+  const { data, dispatch, likedlist } = useReduce();
+
   let videoobj;
   if (data.length > 0) {
     videoobj = data.find((item) => item.id === videoId);
   }
-
-  console.log("input", data);
-  console.log("playlist", playlist);
 
   function Like_button(itempassed) {
     return likedlist.reduce(

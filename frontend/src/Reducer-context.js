@@ -1,15 +1,6 @@
-import {
-  createContext,
-  useContext,
-  useReducer,
-  useState,
-  useEffect
-} from "react";
-import faker from "faker";
+import { createContext, useContext, useReducer, useEffect } from "react";
+
 import axios from "axios";
-
-import { datas } from "./Datas";
-
 const Reducercontext = createContext();
 
 export const category = {
@@ -20,7 +11,6 @@ export const category = {
 };
 
 export function ReducerProvider({ children }) {
-  //console.log("datas",datas)
   const [
     {
       route,
@@ -37,7 +27,6 @@ export function ReducerProvider({ children }) {
     route: "home",
     playlist: [],
     data: [],
-
     history: [],
     likedlist: [],
     sortBy: null,
@@ -50,19 +39,15 @@ export function ReducerProvider({ children }) {
       const playlist = await axios.get(
         "https://videolib-demo.utpalpati.repl.co/playlist/"
       );
-      console.log("playlist coming", playlist);
       const history = await axios.get(
         "https://videolib-demo.utpalpati.repl.co/history/"
       );
-      console.log("history coming", history);
       const liked = await axios.get(
         "https://videolib-demo.utpalpati.repl.co/liked/"
       );
-      console.log("liked coming", liked);
       const videodata = await axios.get(
         "https://videolib-demo.utpalpati.repl.co/video/"
       );
-      console.log("data coming", data);
 
       dispatch({
         type: "LOAD_VIDEODATA",
@@ -80,11 +65,6 @@ export function ReducerProvider({ children }) {
         type: "LOAD_LIKEDLIST",
         payload: liked.data.likeddata
       });
-      // dispatch({
-      //   type: "LOAD_WISHLIST",
-      //   payload: wishlist.data.items
-      // });
-      // setdata(data);
     })();
   }, []);
   return (
@@ -94,7 +74,6 @@ export function ReducerProvider({ children }) {
           route,
           playlist,
           data,
-
           history,
           likedlist,
           sortBy,
@@ -123,14 +102,19 @@ function reduce(state, action) {
 
     case "SORT":
       return { ...state, sortBy: action.payload };
+
     case "LOAD_VIDEODATA":
       return { ...state, data: action.payload };
+
     case "LOAD_PLAYLIST":
       return { ...state, playlist: action.payload };
+
     case "LOAD_HISTORY":
       return { ...state, history: action.payload };
+
     case "LOAD_LIKEDLIST":
       return { ...state, likedlist: action.payload };
+
     case "FILTERCATEGORY":
       if (state.showCategory.includes(action.payload)) {
         return {
@@ -193,7 +177,6 @@ function reduce(state, action) {
 
     case "REMOVE_FROM_PLAYLIST": {
       let { playlistid, videoid } = action.payload;
-      console.log("reducer", playlistid, videoid);
       return {
         ...state,
         playlist: state.playlist.map((item) => {
@@ -213,7 +196,6 @@ function reduce(state, action) {
       let findhistory = state.history.find(
         (item) => item.historyId === action.payload.historyId
       );
-      console.log("add to history", findhistory);
       if (findhistory) {
         let historynewarr = state.history.map((item) => {
           if (item.historyId === action.payload.historyId) {
@@ -224,7 +206,6 @@ function reduce(state, action) {
           }
           return item;
         });
-        console.log("add to history", { ...state, history: historynewarr });
 
         return { ...state, history: historynewarr };
       } else {
@@ -234,7 +215,8 @@ function reduce(state, action) {
     case "REMOVE_FROM_HISTORY":
       return {
         ...state,
-        history: state.history.filter((item) =>item.historyId!==action.payload.historyId
+        history: state.history.filter(
+          (item) => item.historyId !== action.payload.historyId
         )
       };
 

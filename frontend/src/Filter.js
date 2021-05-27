@@ -2,15 +2,7 @@ import { useReduce } from "./Reducer-context";
 import { category } from "./Reducer-context";
 
 export default function Filter({ setshowfilter }) {
-  console.log("?", category);
-
-  let {
-    sortBy,
-    showInventoryAll,
-    showFastDeliveryOnly,
-    dispatch,
-    showCategory
-  } = useReduce();
+  let { dispatch, showCategory } = useReduce();
   return (
     <>
       <ul class="list filterlist">
