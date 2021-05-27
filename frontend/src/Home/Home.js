@@ -7,16 +7,14 @@ import { getSortedData, getFilteredData } from "../App";
 import Navigator from "../Navigator";
 
 export default function Home() {
-  const { data, route, dispatch, videobj, sortBy, showCategory } = useReduce();
+  const { data, dispatch, sortBy, showCategory } = useReduce();
 
   useEffect(() => {
     dispatch({ type: "CLEAR_FILTER" });
   }, []);
 
   let sortedData = getSortedData(data, sortBy);
-  console.log("sorted", sortedData);
   let filteredData = getFilteredData(sortedData, { showCategory });
-  console.log("filtered", filteredData);
 
   async function history_video_add_call(url, payload) {
     try {

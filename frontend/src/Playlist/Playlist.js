@@ -7,17 +7,10 @@ import { Navbar } from "../Navbar";
 import axios from "axios";
 
 export default function Playlist() {
-  // useEffect(() => {
-  //   dispatch({ type: "CLEAR_FILTER" });
-  // }, []);
-
   let { data, playlist, dispatch, sortBy, showCategory } = useReduce();
 
-  console.log("playlist", playlist);
   const [currentplaylist, setplaylist] = useState(0);
 
-  // console.log("now", Object.keys(playlist)[0]);
-  console.log("lop", currentplaylist);
   let datapass =
     playlist[currentplaylist] === undefined
       ? []
@@ -28,9 +21,7 @@ export default function Playlist() {
   });
 
   let sortedData = getSortedData(dataarr, sortBy);
-  // console.log("sorted", sortedData);
   let filteredData = getFilteredData(sortedData, { showCategory });
-  // console.log("filtered", filteredData);
 
   function Showplaylist() {
     return filteredData.map((item) => {
@@ -79,18 +70,14 @@ export default function Playlist() {
     });
   }
   function Removeandupdate(index) {
-    console.log("enter");
     setplaylist((prev) => {
       if (prev === index) {
         if (index + 1 < playlist.length) {
-          console.log("index+1");
           return index;
         } else {
-          console.log("index-1");
           return index - 1;
         }
       }
-      console.log("index");
       if (prev === playlist.length - 1) {
         return prev - 1;
       }

@@ -11,8 +11,8 @@ export default function History() {
   useEffect(() => {
     dispatch({ type: "CLEAR_FILTER" });
   }, []);
+
   const { history, dispatch, sortBy, data, showCategory } = useReduce();
-  console.log("history", history);
 
   const historydata = history.map((eachitem) => {
     let finddata = data.find((item) => item.id === eachitem.historyId);
@@ -23,9 +23,7 @@ export default function History() {
   });
 
   let sortedData = getSortedData(historydata, sortBy);
-  console.log("sorted", sortedData);
   let filteredData = getFilteredData(sortedData, { showCategory });
-  console.log("filtered", filteredData);
 
   function History() {
     async function history_video_add_call(url, payload) {
@@ -44,7 +42,6 @@ export default function History() {
     async function history_video_delete_call(url, payload) {
       try {
         let response = await axios.delete(url, { data: payload });
-        console.log(response);
         if (response.status === 200) {
           dispatch({
             type: "REMOVE_FROM_HISTORY",

@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Navbar } from "../Navbar";
 import axios from "axios";
+
 export default function Liked() {
   useEffect(() => {
     dispatch({ type: "CLEAR_FILTER" });
@@ -20,10 +21,7 @@ export default function Liked() {
   });
 
   let sortedData = getSortedData(likeddata, sortBy);
-  console.log("sorted", sortedData);
-
   let filteredData = getFilteredData(sortedData, { showCategory });
-  console.log("filtered", filteredData);
 
   function Likedlist() {
     async function history_video_add_call(url, payload) {
@@ -94,7 +92,6 @@ export default function Liked() {
     });
   }
 
-  //console.log(playlist);
   return (
     <>
       <Navbar />
