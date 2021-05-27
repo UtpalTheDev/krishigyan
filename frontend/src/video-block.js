@@ -1,10 +1,11 @@
 import { useReduce } from "./Reducer-context";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { v4 as uuid } from "uuid";
 import { Navbar } from "./Navbar";
 import Navigator from "./Navigator";
 import axios from "axios";
+
 export default function VideoBlock() {
   //console.log(routepath);
   let { videoId } = useParams();
@@ -12,8 +13,12 @@ export default function VideoBlock() {
   const [showmodal, setshowmodal] = useState(false);
 
   const { data, dispatch, playlist, likedlist } = useReduce();
-  let videoobj = data.find((item) => item.id === videoId);
-  // console.log("input", newplaylist);
+  let videoobj;
+  if (data.length > 0) {
+    videoobj = data.find((item) => item.id === videoId);
+  }
+
+  console.log("input", data);
   console.log("playlist", playlist);
 
   function Like_button(itempassed) {
@@ -88,6 +93,7 @@ export default function VideoBlock() {
       console.log(err);
     }
   }
+
   return (
     <>
       <Navbar />
@@ -99,73 +105,80 @@ export default function VideoBlock() {
           <span class="material-icons">home</span>
         </button>
       </Link>
-      <div className="element-wrapper">
-        <div className="iframe-wrapper">
-          <iframe
-            height="200"
-            src={`https://www.youtube.com/embed/${videoId}?rel=0&modestbranding=1&autohide=0&showinfo=0&watch-later=0&controls=captions`}
-            title="YouTube video player"
-            frameborder="0"
-            allowfullscreen="allowFullscreen"
-            className="iframe"
-          ></iframe>
-          <br />
-          <div class="xl video-title">{videoobj.title}</div>
-          <div className="iframe-button">
-            {Like_button(videoobj)}
+      {data.length > 0 ? (
+        <div className="element-wrapper">
+          <div className="iframe-wrapper">
+            <iframe
+              height="200"
+              src={`https://www.youtube.com/embed/${videoId}?rel=0&modestbranding=1&autohide=0&showinfo=0&watch-later=0&controls=captions`}
+              title="YouTube video player"
+              frameborder="0"
+              allowfullscreen="allowFullscreen"
+              className="iframe"
+            ></iframe>
+            <br />
+            <div class="xl video-title">{videoobj.title}</div>
+            <div className="iframe-button">
+              {Like_button(videoobj)}
 
-            <button
-              class="icon-button md"
-              onClick={() => setshowmodal((prev) => !prev)}
-            >
-              <span class="material-icons">playlist_add</span>Save
-            </button>
+              <button
+                class="icon-button md"
+                onClick={() => setshowmodal((prev) => !prev)}
+              >
+                <span class="material-icons">playlist_add</span>Save
+              </button>
+            </div>
           </div>
-        </div>
-        {showmodal === true ? (
-          <PlaylistModal setshowmodal={setshowmodal} videoId={videoId} />
-        ) : (
-          ""
-        )}
-        <div className="recommends">
-          Recommended
-          {data
-            .filter(
-              (item) => item.genre === videoobj.genre && item.id !== videoobj.id
-            )
-            .map((item) => {
-              return (
-                <>
-                  <Link to={`/${item.id}`} className="recommend">
-                    <div className="recommend-flexwrapper">
-                      <div className="image-wrapper">
-                        <img
-                          src={`https://i.ytimg.com/vi/${item.id}/mqdefault.jpg`}
-                          onClick={() => {
-                            history_video_add_call(
-                              "https://videolib-demo.utpalpati.repl.co/history/",
-                              {
-                                historyId: item.id,
-                                lastseen: new Date()
-                              }
-                            );
-                          }}
-                          alt="f"
-                        />
-                        <div className="recommendcard-duration md">
-                          {item.duration}
+          {showmodal === true ? (
+            <PlaylistModal setshowmodal={setshowmodal} videoId={videoId} />
+          ) : (
+            ""
+          )}
+          <div className="recommends">
+            Recommended
+            {data
+              .filter(
+                (item) =>
+                  item.genre === videoobj.genre && item.id !== videoobj.id
+              )
+              .map((item) => {
+                return (
+                  <>
+                    <Link to={`/${item.id}`} className="recommend">
+                      <div className="recommend-flexwrapper">
+                        <div className="image-wrapper">
+                          <img
+                            src={`https://i.ytimg.com/vi/${item.id}/mqdefault.jpg`}
+                            onClick={() => {
+                              history_video_add_call(
+                                "https://videolib-demo.utpalpati.repl.co/history/",
+                                {
+                                  historyId: item.id,
+                                  lastseen: new Date()
+                                }
+                              );
+                            }}
+                            alt="f"
+                          />
+                          <div className="recommendcard-duration md">
+                            {item.duration}
+                          </div>
+                        </div>
+                        <div className="recommendcard-desc">
+                          <div className="recommendcard-title">
+                            {item.title}
+                          </div>
                         </div>
                       </div>
-                      <div className="recommendcard-desc">
-                        <div className="recommendcard-title">{item.title}</div>
-                      </div>
-                    </div>
-                  </Link>
-                </>
-              );
-            })}
+                    </Link>
+                  </>
+                );
+              })}
+          </div>
         </div>
-      </div>
+      ) : (
+        "Loading"
+      )}
     </>
   );
 }
