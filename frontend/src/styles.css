@@ -266,9 +266,11 @@ button {
   width: 98.6%;
   overflow: hidden;
   text-overflow: ellipsis;
-  height: 1.4em;
   line-height: 1.5;
   padding: 0 0 0 0.3em;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
 }
 .videos-duration {
   position: absolute;
@@ -380,8 +382,11 @@ button {
   width: 98.6%;
   overflow: hidden;
   text-overflow: ellipsis;
-  height: 1.4em;
+
   padding: 0 0 0 0.3em;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
 }
 .recommendcard-duration {
   position: absolute;
