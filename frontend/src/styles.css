@@ -7,9 +7,6 @@ a {
   text-decoration: none;
   color: inherit;
 }
-#sb__open-sandbox31 {
-  display: none;
-}
 
 /*----------------videoblock----------------*/
 .playlistmodal {
@@ -152,12 +149,13 @@ button {
   width: 50%;
   min-width: 130px;
   max-width: 200px;
+  flex: 1;
 }
 .playlist-card-desc {
   font-size: inherit;
   overflow: hidden;
   height: 20px;
-  flex-grow: 2;
+  flex: 2;
   padding-left: 0.5rem;
 }
 .playlist-card > a {
@@ -184,12 +182,13 @@ button {
   width: 50%;
   min-width: 130px;
   max-width: 200px;
+  flex: 1;
 }
 .likedlist-card-desc {
   font-size: inherit;
   overflow: hidden;
   height: 20px;
-  flex-grow: 2;
+  flex: 2;
   padding-left: 0.5rem;
 }
 .likedlist-card button {
@@ -215,12 +214,13 @@ button {
   width: 50%;
   min-width: 130px;
   max-width: 200px;
+  flex: 1;
 }
 .history-card-desc {
   font-size: inherit;
   overflow: hidden;
   height: 20px;
-  flex-grow: 2;
+  flex: 2;
   padding-left: 0.5rem;
 }
 .history-card button {
@@ -442,6 +442,9 @@ button {
 .filterlist > li:last-child {
   margin-bottom: 5rem;
 }
+.filterlist > li {
+  justify-content: start;
+}
 
 /*----------------media query----------------*/
 @media only screen and (max-width: 500px) {
@@ -578,6 +581,6 @@ button {
     border-radius: 0 40% 0 0;
   }
   .playlistitem {
-    height: 55vh;
+    height: 50vh;
   }
 }
