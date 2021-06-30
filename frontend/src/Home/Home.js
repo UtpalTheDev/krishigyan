@@ -2,7 +2,6 @@ import { useReduce } from "../Reducer-context";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import { Navbar } from "../Navbar";
-import axios from "axios";
 import { getSortedData, getFilteredData } from "../App";
 import Navigator from "../Navigator";
 import { useLogin } from "../LoginContext";

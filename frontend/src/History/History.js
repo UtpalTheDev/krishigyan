@@ -4,7 +4,7 @@ import { getSortedData, getFilteredData } from "../App";
 import Navigator from "../Navigator";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
+import { toast } from "react-toastify";
 import { Navbar } from "../Navbar";
 import {
   history_video_add_call,
@@ -30,33 +30,6 @@ export default function History() {
   let filteredData = getFilteredData(sortedData, { showCategory });
 
   function History() {
-    // async function history_video_add_call(url, payload) {
-    //   try {
-    //     let response = await axios.post(url, payload);
-    //     if (response.status === 200) {
-    //       dispatch({
-    //         type: "ADD_TO_HISTORY",
-    //         payload: payload
-    //       });
-    //     }
-    //   } catch (err) {
-    //     console.log(err);
-    //   }
-    // }
-    // async function history_video_delete_call(url, payload) {
-    //   try {
-    //     let response = await axios.delete(url, { data: payload });
-    //     if (response.status === 200) {
-    //       dispatch({
-    //         type: "REMOVE_FROM_HISTORY",
-    //         payload: payload
-    //       });
-    //     }
-    //   } catch (err) {
-    //     console.log(err);
-    //   }
-    // }
-
     return filteredData
       .filter((item) => item.ishistory !== false)
       .map((item) => {
@@ -91,12 +64,14 @@ export default function History() {
               </Link>
               <button
                 class="icon-button lg"
-                onClick={() => {
-                  history_video_delete_call(
+                onClick={async () => {
+                  let historymsg = await history_video_delete_call(
                     "https://videolib-demo-1.utpalpati.repl.co/history/",
                     { historyId: item.id },
                     dispatch
                   );
+                  const notify = () => toast.dark(historymsg);
+                  notify();
                 }}
               >
                 <i class="fas fa-trash-alt"></i>

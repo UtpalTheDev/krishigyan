@@ -1,5 +1,7 @@
 import "./styles.css";
 import { Routes, Route } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import VideoBlock from "./video-block";
 import Home from "./Home/Home";
 import Playlist from "./Playlist/Playlist";
@@ -23,6 +25,12 @@ export default function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
       </Routes>
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={true}
+        newestOnTop={true}
+      />
     </div>
   );
 }

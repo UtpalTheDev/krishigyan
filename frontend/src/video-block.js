@@ -5,6 +5,7 @@ import { v4 as uuid } from "uuid";
 import { Navbar } from "./Navbar";
 import axios from "axios";
 import { useLogin } from "./LoginContext";
+import { toast } from "react-toastify";
 
 import {
   liked_video_add_call,
@@ -32,13 +33,15 @@ export default function VideoBlock() {
           return (
             <button
               class="icon-button md"
-              onClick={() =>
-                liked_video_delete_call(
+              onClick={async () => {
+                let likedmsg = await liked_video_delete_call(
                   "https://videolib-demo-1.utpalpati.repl.co/liked/",
                   { likedId: item },
                   dispatch
-                )
-              }
+                );
+                const notify = () => toast.dark(likedmsg);
+                notify();
+              }}
             >
               <span class="material-icons">thumb_up</span>Unlike
             </button>
@@ -48,13 +51,15 @@ export default function VideoBlock() {
       },
       <button
         class="icon-button md"
-        onClick={() => {
+        onClick={async () => {
           if (isUserLogIn) {
-            liked_video_add_call(
+            let likedmsg = await liked_video_add_call(
               "https://videolib-demo-1.utpalpati.repl.co/liked/",
               { likedId: itempassed.id },
               dispatch
             );
+            const notify = () => toast.dark(likedmsg);
+            notify();
           } else {
             navigate("/login");
           }
@@ -183,8 +188,8 @@ function PlaylistModal({ setshowmodal, videoId }) {
               return (
                 <>
                   <li
-                    onClick={() => {
-                      playlist_video_add_call(
+                    onClick={async () => {
+                      let playlistmsg = await playlist_video_add_call(
                         "https://videolib-demo-1.utpalpati.repl.co/playlist/video",
                         {
                           videoid: videoId,
@@ -192,6 +197,8 @@ function PlaylistModal({ setshowmodal, videoId }) {
                         },
                         dispatch
                       );
+                      const notify = () => toast.dark(playlistmsg);
+                      notify();
                       setshowmodal((prev) => !prev);
                     }}
                   >
@@ -238,21 +245,23 @@ function PlaylistModal({ setshowmodal, videoId }) {
 
               <button
                 class="secondary-button"
-                onClick={() => {
+                onClick={async () => {
+                  if (newplaylist !== "") {
+                    let playlistmsg = await playlist_add_call(
+                      "https://videolib-demo-1.utpalpati.repl.co/playlist/",
+                      {
+                        playlistobj: {
+                          id: uuid(),
+                          name: newplaylist,
+                          videos: []
+                        }
+                      },
+                      dispatch
+                    );
+                    const notify = () => toast.dark(playlistmsg);
+                    notify();
+                  }
                   setshowinput(false);
-                  newplaylist !== ""
-                    ? playlist_add_call(
-                        "https://videolib-demo-1.utpalpati.repl.co/playlist/",
-                        {
-                          playlistobj: {
-                            id: uuid(),
-                            name: newplaylist,
-                            videos: []
-                          }
-                        },
-                        dispatch
-                      )
-                    : console.log("blank");
                   setnewplaylist("");
                 }}
               >

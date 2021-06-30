@@ -4,7 +4,7 @@ import { getSortedData, getFilteredData } from "../App";
 import Navigator from "../Navigator";
 import { Link } from "react-router-dom";
 import { Navbar } from "../Navbar";
-import axios from "axios";
+import { toast } from "react-toastify";
 import {
   playlist_delete_call,
   playlist_video_delete_call
@@ -56,8 +56,8 @@ export default function Playlist() {
             </Link>
             <button
               class="icon-button lg"
-              onClick={() => {
-                playlist_video_delete_call(
+              onClick={async () => {
+                let playlistmsg = await playlist_video_delete_call(
                   "https://videolib-demo-1.utpalpati.repl.co/playlist/video/",
                   {
                     playlistid: playlist[currentplaylist].id,
@@ -65,6 +65,8 @@ export default function Playlist() {
                   },
                   dispatch
                 );
+                const notify = () => toast.dark(playlistmsg);
+                notify();
               }}
             >
               <i class="fas fa-times"></i>
@@ -114,12 +116,14 @@ export default function Playlist() {
                     class="icon-button md"
                     onClick={() => {
                       (async function () {
-                        await playlist_delete_call(
+                        let playlistmsg = await playlist_delete_call(
                           "https://videolib-demo-1.utpalpati.repl.co/playlist/",
                           { playlistid: item.id },
                           dispatch
                         );
                         Removeandupdate(index);
+                        const notify = () => toast.dark(playlistmsg);
+                        notify();
                       })();
                     }}
                   >

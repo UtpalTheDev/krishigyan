@@ -4,7 +4,7 @@ import Navigator from "../Navigator";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Navbar } from "../Navbar";
-import axios from "axios";
+import { toast } from "react-toastify";
 import {
   history_video_add_call,
   liked_video_delete_call
@@ -55,12 +55,14 @@ export default function Liked() {
             </Link>
             <button
               class="icon-button lg"
-              onClick={() => {
-                liked_video_delete_call(
+              onClick={async () => {
+                let likedlistmsg = await liked_video_delete_call(
                   "https://videolib-demo-1.utpalpati.repl.co/liked/",
                   { likedId: item.id },
                   dispatch
                 );
+                const notify = () => toast.dark(likedlistmsg);
+                notify();
               }}
             >
               <i class="far fa-thumbs-down"></i>
