@@ -11,6 +11,7 @@
     "miragejs": "0.1.41",
     "react": "17.0.2",
     "react-dom": "17.0.2",
+    "react-loader-spinner": "4.0.0",
     "react-router-dom": "6.0.0-beta.0",
     "react-scripts": "4.0.0",
     "react-timeago": "5.2.0",

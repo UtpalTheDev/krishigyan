@@ -24,7 +24,8 @@ export function ReducerProvider({ children }) {
       likedlist,
       sortBy,
       showDuration,
-      showCategory
+      showCategory,
+      loading
     },
     dispatch
   ] = useReducer(reduce, {
@@ -35,42 +36,50 @@ export function ReducerProvider({ children }) {
     likedlist: [],
     sortBy: null,
     showDuration: 0,
-    showCategory: []
+    showCategory: [],
+    loading: false
   });
 
   useEffect(() => {
     (async function () {
-      const videodata = await axios.get(
-        "https://videolib-demo-1.utpalpati.repl.co/video/"
-      );
-      dispatch({
-        type: "LOAD_VIDEODATA",
-        payload: videodata.data
-      });
+      try {
+        dispatch({ type: "LOAD", payload: true });
+        const videodata = await axios.get(
+          "https://videolib-demo-1.utpalpati.repl.co/video/"
+        );
+        dispatch({
+          type: "LOAD_VIDEODATA",
+          payload: videodata.data
+        });
 
-      if (isUserLogIn) {
-        const playlist = await axios.get(
-          "https://videolib-demo-1.utpalpati.repl.co/playlist/"
-        );
-        const history = await axios.get(
-          "https://videolib-demo-1.utpalpati.repl.co/history/"
-        );
-        const liked = await axios.get(
-          "https://videolib-demo-1.utpalpati.repl.co/liked/"
-        );
+        if (isUserLogIn) {
+          dispatch({ type: "LOAD", payload: true });
+          const playlist = await axios.get(
+            "https://videolib-demo-1.utpalpati.repl.co/playlist/"
+          );
+          const history = await axios.get(
+            "https://videolib-demo-1.utpalpati.repl.co/history/"
+          );
+          const liked = await axios.get(
+            "https://videolib-demo-1.utpalpati.repl.co/liked/"
+          );
 
-        dispatch({
-          type: "LOAD_PLAYLIST",
-          payload: playlist.data.playlistdata
-        });
-        dispatch({
-          type: "LOAD_HISTORY",
-          payload: history.data.historydata
-        });
-        dispatch({
-          type: "LOAD_LIKEDLIST",
-          payload: liked.data.likeddata
-        });
+          dispatch({
+            type: "LOAD_PLAYLIST",
+            payload: playlist.data.playlistdata
+          });
+          dispatch({
+            type: "LOAD_HISTORY",
+            payload: history.data.historydata
+          });
+          dispatch({
+            type: "LOAD_LIKEDLIST",
+            payload: liked.data.likeddata
+          });
+        }
+        dispatch({ type: "LOAD", payload: false });
+      } catch (error) {
+        dispatch({ type: "LOAD", payload: false });
       }
     })();
   }, [isUserLogIn]);
@@ -86,7 +95,8 @@ export function ReducerProvider({ children }) {
           sortBy,
           showDuration,
           showCategory,
-          dispatch
+          dispatch,
+          loading
         }}
       >
         {children}
@@ -101,6 +111,8 @@ export function useReduce() {
 
 function reduce(state, action) {
   switch (action.type) {
+    case "LOAD":
+      return { ...state, loading: action.payload };
     case "USER":
       return {
         ...state,

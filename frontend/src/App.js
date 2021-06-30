@@ -1,7 +1,9 @@
 import "./styles.css";
 import { Routes, Route } from "react-router-dom";
+import Loader from "react-loader-spinner";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useReduce } from "./Reducer-context";
 import VideoBlock from "./video-block";
 import Home from "./Home/Home";
 import Playlist from "./Playlist/Playlist";
@@ -12,6 +14,7 @@ import Login from "./Login";
 import Signup from "./Signup";
 import User from "./User";
 export default function App() {
+  const { loading } = useReduce();
   return (
     <div className="App">
       <Routes>
@@ -25,6 +28,17 @@ export default function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
       </Routes>
+      {loading && (
+        <div className="loader">
+          <Loader
+            type="BallTriangle"
+            color="green"
+            height={100}
+            width={100}
+            timeout={1000000} //3 secs
+          />
+        </div>
+      )}
       <ToastContainer
         position="top-right"
         autoClose={3000}
