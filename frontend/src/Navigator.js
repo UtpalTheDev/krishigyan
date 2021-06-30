@@ -14,10 +14,7 @@ export default function Navigator({ value }) {
       <div className="navigator">
         <Link to="/">
           {" "}
-          <button
-            style={{ background: value === "home" ? "#f2f2f2" : "" }}
-            onClick={() => dispatch({ type: "ROUTING", payload: "liked" })}
-          >
+          <button style={{ background: value === "home" ? "#f2f2f2" : "" }}>
             <span class="material-icons">home</span>
             <br />
             Home
@@ -25,10 +22,7 @@ export default function Navigator({ value }) {
         </Link>
         <Link to="/playlist">
           {" "}
-          <button
-            style={{ background: value === "playlist" ? "#f2f2f2" : "" }}
-            onClick={() => dispatch({ type: "ROUTING", payload: "playlist" })}
-          >
+          <button style={{ background: value === "playlist" ? "#f2f2f2" : "" }}>
             <span class="material-icons">video_library</span>
             <br />
             Playlist
@@ -37,10 +31,7 @@ export default function Navigator({ value }) {
 
         <Link to="/liked">
           {" "}
-          <button
-            style={{ background: value === "liked" ? "#f2f2f2" : "" }}
-            onClick={() => dispatch({ type: "ROUTING", payload: "liked" })}
-          >
+          <button style={{ background: value === "liked" ? "#f2f2f2" : "" }}>
             <span class="material-icons">thumb_up_alt</span>
             <br />
             Liked
@@ -49,10 +40,7 @@ export default function Navigator({ value }) {
 
         <Link to="/history">
           {" "}
-          <button
-            style={{ background: value === "history" ? "#f2f2f2" : "" }}
-            onClick={() => dispatch({ type: "ROUTING", payload: "history" })}
-          >
+          <button style={{ background: value === "history" ? "#f2f2f2" : "" }}>
             <span class="material-icons">history</span>
             <br />
             History

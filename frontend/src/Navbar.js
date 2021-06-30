@@ -14,7 +14,9 @@ export function Navbar() {
           <span class="material-icons">search</span>
         </div>
         <div className="videonavbar-others">
-          <span class="material-icons">notifications</span>
+          <Link to="/user">
+            <span class="material-icons">person</span>
+          </Link>
         </div>
       </div>
     </>

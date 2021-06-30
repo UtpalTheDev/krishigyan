@@ -3,15 +3,17 @@ import ReactDOM from "react-dom";
 import { ReducerProvider } from "./Reducer-context";
 import { BrowserRouter as Router } from "react-router-dom";
 import App from "./App";
-// SetupMockServer();
+import { LoginProvider } from "./LoginContext";
 const rootElement = document.getElementById("root");
 ReactDOM.render(
   <StrictMode>
-    <ReducerProvider>
-      <Router>
-        <App />
-      </Router>
-    </ReducerProvider>
+    <Router>
+      <LoginProvider>
+        <ReducerProvider>
+          <App />
+        </ReducerProvider>
+      </LoginProvider>
+    </Router>
   </StrictMode>,
   rootElement
 );

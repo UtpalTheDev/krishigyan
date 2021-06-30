@@ -5,16 +5,23 @@ import Home from "./Home/Home";
 import Playlist from "./Playlist/Playlist";
 import History from "./History/History";
 import Liked from "./Liked/Liked";
-
+import PrivateRoute from "./PrivateRoute";
+import Login from "./Login";
+import Signup from "./Signup";
+import User from "./User";
 export default function App() {
   return (
     <div className="App">
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/:videoId" element={<VideoBlock />} />
-        <Route path="/playlist" element={<Playlist />} />
-        <Route path="/history" element={<History />} />
-        <Route path="/Liked" element={<Liked />} />
+        <PrivateRoute path="/playlist" element={<Playlist />} />
+        <PrivateRoute path="/history" element={<History />} />
+        <PrivateRoute path="/liked" element={<Liked />} />
+        <PrivateRoute path="/user" element={<User />} />
+
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
       </Routes>
     </div>
   );

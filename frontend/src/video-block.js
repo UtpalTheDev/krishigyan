@@ -1,22 +1,30 @@
 import { useReduce } from "./Reducer-context";
 import { useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { v4 as uuid } from "uuid";
 import { Navbar } from "./Navbar";
 import axios from "axios";
+import { useLogin } from "./LoginContext";
+
+import {
+  liked_video_add_call,
+  liked_video_delete_call,
+  history_video_add_call,
+  playlist_add_call,
+  playlist_video_add_call
+} from "./api/serverRequests";
 
 export default function VideoBlock() {
   let { videoId } = useParams();
-
+  const navigate = useNavigate();
   const [showmodal, setshowmodal] = useState(false);
 
   const { data, dispatch, likedlist } = useReduce();
-
+  const { isUserLogIn } = useLogin();
   let videoobj;
   if (data.length > 0) {
     videoobj = data.find((item) => item.id === videoId);
   }
-
   function Like_button(itempassed) {
     return likedlist.reduce(
       (defaultbutton, item) => {
@@ -26,8 +34,9 @@ export default function VideoBlock() {
               class="icon-button md"
               onClick={() =>
                 liked_video_delete_call(
-                  "https://videolib-demo.utpalpati.repl.co/liked/",
-                  { likedId: item }
+                  "https://videolib-demo-1.utpalpati.repl.co/liked/",
+                  { likedId: item },
+                  dispatch
                 )
               }
             >
@@ -40,64 +49,27 @@ export default function VideoBlock() {
       <button
         class="icon-button md"
         onClick={() => {
-          liked_video_add_call(
-            "https://videolib-demo.utpalpati.repl.co/liked/",
-            { likedId: itempassed.id }
-          );
+          if (isUserLogIn) {
+            liked_video_add_call(
+              "https://videolib-demo-1.utpalpati.repl.co/liked/",
+              { likedId: itempassed.id },
+              dispatch
+            );
+          } else {
+            navigate("/login");
+          }
         }}
       >
         <span class="material-icons">thumb_up_off_alt</span>Like
       </button>
     );
   }
-  async function liked_video_add_call(url, payload) {
-    try {
-      let response = await axios.post(url, payload);
-      if (response.status === 200) {
-        dispatch({
-          type: "ADD_TO_LIKEDLIST",
-          payload: payload.likedId
-        });
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  }
-  async function liked_video_delete_call(url, payload) {
-    try {
-      let response = await axios.delete(url, { data: payload });
-      if (response.status === 200) {
-        dispatch({
-          type: "REMOVE_FROM_LIKEDLIST",
-          payload: payload.likedId
-        });
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  }
-  async function history_video_add_call(url, payload) {
-    try {
-      let response = await axios.post(url, payload);
-      if (response.status === 200) {
-        dispatch({
-          type: "ADD_TO_HISTORY",
-          payload: payload
-        });
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  }
 
   return (
     <>
       <Navbar />
       <Link to="/" className="home">
-        <button
-          class="icon-button round lg"
-          onClick={() => dispatch({ type: "ROUTING", payload: "home" })}
-        >
+        <button class="icon-button round lg">
           <span class="material-icons">home</span>
         </button>
       </Link>
@@ -119,7 +91,13 @@ export default function VideoBlock() {
 
               <button
                 class="icon-button md"
-                onClick={() => setshowmodal((prev) => !prev)}
+                onClick={() => {
+                  if (isUserLogIn) {
+                    setshowmodal((prev) => !prev);
+                  } else {
+                    navigate("/login");
+                  }
+                }}
               >
                 <span class="material-icons">playlist_add</span>Save
               </button>
@@ -147,11 +125,12 @@ export default function VideoBlock() {
                             src={`https://i.ytimg.com/vi/${item.id}/mqdefault.jpg`}
                             onClick={() => {
                               history_video_add_call(
-                                "https://videolib-demo.utpalpati.repl.co/history/",
+                                "https://videolib-demo-1.utpalpati.repl.co/history/",
                                 {
                                   historyId: item.id,
                                   lastseen: new Date()
-                                }
+                                },
+                                dispatch
                               );
                             }}
                             alt="f"
@@ -183,34 +162,8 @@ function PlaylistModal({ setshowmodal, videoId }) {
   const [newplaylist, setnewplaylist] = useState("");
   const [showinput, setshowinput] = useState(false);
 
-  let { dispatch, playlist } = useReduce();
+  const { dispatch, playlist } = useReduce();
 
-  async function playlist_add_call(url, payload) {
-    try {
-      let response = await axios.post(url, payload);
-      if (response.status === 200) {
-        dispatch({
-          type: "NEW_PLAYLIST",
-          payload: payload.playlistobj
-        });
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  }
-  async function playlist_video_add_call(url, payload) {
-    try {
-      let response = await axios.post(url, payload);
-      if (response.status === 200) {
-        dispatch({
-          type: "ADD_TO_PLAYLIST",
-          payload: payload
-        });
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  }
   return (
     <>
       <div className="playlistmodal">
@@ -232,11 +185,12 @@ function PlaylistModal({ setshowmodal, videoId }) {
                   <li
                     onClick={() => {
                       playlist_video_add_call(
-                        "https://videolib-demo.utpalpati.repl.co/playlist/video",
+                        "https://videolib-demo-1.utpalpati.repl.co/playlist/video",
                         {
                           videoid: videoId,
                           playlistid: item.id
-                        }
+                        },
+                        dispatch
                       );
                       setshowmodal((prev) => !prev);
                     }}
@@ -288,14 +242,15 @@ function PlaylistModal({ setshowmodal, videoId }) {
                   setshowinput(false);
                   newplaylist !== ""
                     ? playlist_add_call(
-                        "https://videolib-demo.utpalpati.repl.co/playlist/",
+                        "https://videolib-demo-1.utpalpati.repl.co/playlist/",
                         {
                           playlistobj: {
                             id: uuid(),
                             name: newplaylist,
                             videos: []
                           }
-                        }
+                        },
+                        dispatch
                       )
                     : console.log("blank");
                   setnewplaylist("");

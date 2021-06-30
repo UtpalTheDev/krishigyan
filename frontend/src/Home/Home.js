@@ -5,30 +5,18 @@ import { Navbar } from "../Navbar";
 import axios from "axios";
 import { getSortedData, getFilteredData } from "../App";
 import Navigator from "../Navigator";
+import { useLogin } from "../LoginContext";
+import { history_video_add_call } from "../api/serverRequests";
 
 export default function Home() {
   const { data, dispatch, sortBy, showCategory } = useReduce();
-
+  const { isUserLogIn } = useLogin();
   useEffect(() => {
     dispatch({ type: "CLEAR_FILTER" });
   }, []);
 
   let sortedData = getSortedData(data, sortBy);
   let filteredData = getFilteredData(sortedData, { showCategory });
-
-  async function history_video_add_call(url, payload) {
-    try {
-      let response = await axios.post(url, payload);
-      if (response.status === 200) {
-        dispatch({
-          type: "ADD_TO_HISTORY",
-          payload: payload
-        });
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  }
 
   return (
     <>
@@ -42,18 +30,19 @@ export default function Home() {
                 <div
                   onClick={() => {
                     history_video_add_call(
-                      "https://videolib-demo.utpalpati.repl.co/history/",
+                      "https://videolib-demo-1.utpalpati.repl.co/history/",
                       {
                         historyId: item.id,
                         lastseen: new Date()
-                      }
+                      },
+                      dispatch
                     );
                   }}
                 >
                   <div className="image-wrapper">
                     <img
                       src={`https://i.ytimg.com/vi/${item.id}/mqdefault.jpg`}
-                      alt="f"
+                      alt="videoimg"
                     />
                     <div className="videos-duration md">
                       {item.duration.toFixed(2)}

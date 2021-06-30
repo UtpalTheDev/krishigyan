@@ -5,6 +5,10 @@ import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Navbar } from "../Navbar";
 import axios from "axios";
+import {
+  history_video_add_call,
+  liked_video_delete_call
+} from "../api/serverRequests";
 
 export default function Liked() {
   useEffect(() => {
@@ -24,33 +28,6 @@ export default function Liked() {
   let filteredData = getFilteredData(sortedData, { showCategory });
 
   function Likedlist() {
-    async function history_video_add_call(url, payload) {
-      try {
-        let response = await axios.post(url, payload);
-        if (response.status === 200) {
-          dispatch({
-            type: "ADD_TO_HISTORY",
-            payload: payload
-          });
-        }
-      } catch (err) {
-        console.log(err);
-      }
-    }
-    async function liked_video_delete_call(url, payload) {
-      try {
-        let response = await axios.delete(url, { data: payload });
-        if (response.status === 200) {
-          dispatch({
-            type: "REMOVE_FROM_LIKEDLIST",
-            payload: payload.likedId
-          });
-        }
-      } catch (err) {
-        console.log(err);
-      }
-    }
-
     return filteredData.map((item) => {
       return (
         <>
@@ -60,11 +37,12 @@ export default function Liked() {
                 className="likedlist-card-data"
                 onClick={() => {
                   history_video_add_call(
-                    "https://videolib-demo.utpalpati.repl.co/history/",
+                    "https://videolib-demo-1.utpalpati.repl.co/history/",
                     {
                       historyId: item.id,
                       lastseen: new Date()
-                    }
+                    },
+                    dispatch
                   );
                 }}
               >
@@ -79,8 +57,9 @@ export default function Liked() {
               class="icon-button lg"
               onClick={() => {
                 liked_video_delete_call(
-                  "https://videolib-demo.utpalpati.repl.co/liked/",
-                  { likedId: item.id }
+                  "https://videolib-demo-1.utpalpati.repl.co/liked/",
+                  { likedId: item.id },
+                  dispatch
                 );
               }}
             >

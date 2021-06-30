@@ -457,7 +457,75 @@ button {
 .filterlist > li {
   justify-content: start;
 }
+/*-----------------------login----------------*/
+.login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 89vh;
+  flex-wrap: wrap;
+}
+.login-sideimg {
+  height: 100%;
+  flex: 3;
+  min-width: 300px;
+}
+.form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 0rem 2rem;
+  flex: 2;
+}
+.form {
+  width: 200px;
+}
+.form-action {
+  display: flex;
+  justify-content: center;
+}
+.form label {
+  width: 100%;
+  box-sizing: border-box;
+  height: 80px;
+}
+.input.md > .input-text {
+  width: 100%;
+  box-sizing: border-box;
+  height: 30px;
+}
 
+/*------------------------signup----------------------*/
+
+.signup {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 89vh;
+  flex-wrap: wrap;
+}
+.signup-sideimg {
+  height: 100%;
+  flex: 3;
+  min-width: 300px;
+}
+/*-------------------------user--------------------*/
+.user {
+  display: flex;
+  justify-content: center;
+  margin-top: 5rem;
+}
+.user-data {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.user-logout {
+  position: fixed;
+  top: 10%;
+  right: 2%;
+}
 /*----------------media query----------------*/
 @media only screen and (max-width: 500px) {
   .videonavbar-search > input {

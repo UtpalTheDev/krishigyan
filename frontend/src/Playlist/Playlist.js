@@ -5,6 +5,10 @@ import Navigator from "../Navigator";
 import { Link } from "react-router-dom";
 import { Navbar } from "../Navbar";
 import axios from "axios";
+import {
+  playlist_delete_call,
+  playlist_video_delete_call
+} from "../api/serverRequests";
 
 export default function Playlist() {
   let { data, playlist, dispatch, sortBy, showCategory } = useReduce();
@@ -54,11 +58,12 @@ export default function Playlist() {
               class="icon-button lg"
               onClick={() => {
                 playlist_video_delete_call(
-                  "https://videolib-demo.utpalpati.repl.co/playlist/video/",
+                  "https://videolib-demo-1.utpalpati.repl.co/playlist/video/",
                   {
                     playlistid: playlist[currentplaylist].id,
                     videoid: item.id
-                  }
+                  },
+                  dispatch
                 );
               }}
             >
@@ -84,32 +89,7 @@ export default function Playlist() {
       return prev;
     });
   }
-  async function playlist_video_delete_call(url, payload) {
-    try {
-      let response = await axios.delete(url, { data: payload });
-      if (response.status === 200) {
-        dispatch({
-          type: "REMOVE_FROM_PLAYLIST",
-          payload: payload
-        });
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  }
-  async function playlist_delete_call(url, payload) {
-    try {
-      let response = await axios.delete(url, { data: payload });
-      if (response.status === 200) {
-        dispatch({
-          type: "REMOVE_PLAYLIST",
-          payload: payload.playlistid
-        });
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  }
+
   return (
     <>
       <Navbar />
@@ -133,12 +113,14 @@ export default function Playlist() {
                   <button
                     class="icon-button md"
                     onClick={() => {
-                      Removeandupdate(index);
-
-                      playlist_delete_call(
-                        "https://videolib-demo.utpalpati.repl.co/playlist/",
-                        { playlistid: item.id }
-                      );
+                      (async function () {
+                        await playlist_delete_call(
+                          "https://videolib-demo-1.utpalpati.repl.co/playlist/",
+                          { playlistid: item.id },
+                          dispatch
+                        );
+                        Removeandupdate(index);
+                      })();
                     }}
                   >
                     <i class="fas fa-times"></i>

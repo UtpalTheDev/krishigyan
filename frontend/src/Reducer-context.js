@@ -1,6 +1,8 @@
 import { createContext, useContext, useReducer, useEffect } from "react";
 
 import axios from "axios";
+import { useLogin } from "./LoginContext";
+
 const Reducercontext = createContext();
 
 export const category = {
@@ -11,9 +13,11 @@ export const category = {
 };
 
 export function ReducerProvider({ children }) {
+  const { token, isUserLogIn } = useLogin();
+
   const [
     {
-      route,
+      user,
       playlist,
       data,
       history,
@@ -24,7 +28,7 @@ export function ReducerProvider({ children }) {
     },
     dispatch
   ] = useReducer(reduce, {
-    route: "home",
+    user: {},
     playlist: [],
     data: [],
     history: [],
@@ -36,42 +40,45 @@ export function ReducerProvider({ children }) {
 
   useEffect(() => {
     (async function () {
-      const playlist = await axios.get(
-        "https://videolib-demo.utpalpati.repl.co/playlist/"
-      );
-      const history = await axios.get(
-        "https://videolib-demo.utpalpati.repl.co/history/"
-      );
-      const liked = await axios.get(
-        "https://videolib-demo.utpalpati.repl.co/liked/"
-      );
       const videodata = await axios.get(
-        "https://videolib-demo.utpalpati.repl.co/video/"
+        "https://videolib-demo-1.utpalpati.repl.co/video/"
       );
-
       dispatch({
         type: "LOAD_VIDEODATA",
         payload: videodata.data
       });
-      dispatch({
-        type: "LOAD_PLAYLIST",
-        payload: playlist.data.playlistdata
-      });
-      dispatch({
-        type: "LOAD_HISTORY",
-        payload: history.data.historydata
-      });
-      dispatch({
-        type: "LOAD_LIKEDLIST",
-        payload: liked.data.likeddata
-      });
+
+      if (isUserLogIn) {
+        const playlist = await axios.get(
+          "https://videolib-demo-1.utpalpati.repl.co/playlist/"
+        );
+        const history = await axios.get(
+          "https://videolib-demo-1.utpalpati.repl.co/history/"
+        );
+        const liked = await axios.get(
+          "https://videolib-demo-1.utpalpati.repl.co/liked/"
+        );
+
+        dispatch({
+          type: "LOAD_PLAYLIST",
+          payload: playlist.data.playlistdata
+        });
+        dispatch({
+          type: "LOAD_HISTORY",
+          payload: history.data.historydata
+        });
+        dispatch({
+          type: "LOAD_LIKEDLIST",
+          payload: liked.data.likeddata
+        });
+      }
     })();
-  }, []);
+  }, [isUserLogIn]);
   return (
     <>
       <Reducercontext.Provider
         value={{
-          route,
+          user,
           playlist,
           data,
           history,
@@ -94,9 +101,22 @@ export function useReduce() {
 
 function reduce(state, action) {
   switch (action.type) {
-    case "ROUTING":
-      return { ...state, route: action.payload };
-
+    case "USER":
+      return {
+        ...state,
+        user: { name: action.payload.userName, email: action.payload.email }
+      };
+    case "RESET":
+      return {
+        ...state,
+        user: {},
+        playlist: [],
+        history: [],
+        likedlist: [],
+        sortBy: null,
+        showDuration: 0,
+        showCategory: []
+      };
     case "PLAYING":
       return { ...state, videoobj: action.payload };
 
