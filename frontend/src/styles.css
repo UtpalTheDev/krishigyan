@@ -537,6 +537,28 @@ button {
   top: 10%;
   right: 2%;
 }
+
+/*-----------404--------*/
+
+.notfound {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: white;
+}
+.notfound > div {
+  font-size: 50px;
+  text-align: center;
+  font-weight: 700;
+}
+.notfound > div > a {
+  font-size: 18px;
+  text-decoration: underline;
+}
 /*----------------media query----------------*/
 @media only screen and (max-width: 500px) {
   .videonavbar-search > input {

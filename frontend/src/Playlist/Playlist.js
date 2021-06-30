@@ -33,7 +33,7 @@ export default function Playlist() {
         <>
           {" "}
           <div className="playlist-card">
-            <Link to={`/${item.id}`}>
+            <Link to={`/video/${item.id}`}>
               {" "}
               <div
                 className="playlist-card-data"

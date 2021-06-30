@@ -32,7 +32,7 @@ export default function Liked() {
       return (
         <>
           <div className="likedlist-card">
-            <Link to={`/${item.id}`}>
+            <Link to={`/video/${item.id}`}>
               <div
                 className="likedlist-card-data"
                 onClick={() => {

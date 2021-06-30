@@ -13,13 +13,14 @@ import PrivateRoute from "./PrivateRoute";
 import Login from "./Login";
 import Signup from "./Signup";
 import User from "./User";
+import NotFound from "./NotFound";
 export default function App() {
   const { loading } = useReduce();
   return (
     <div className="App">
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/:videoId" element={<VideoBlock />} />
+        <Route path="/video/:videoId" element={<VideoBlock />} />
         <PrivateRoute path="/playlist" element={<Playlist />} />
         <PrivateRoute path="/history" element={<History />} />
         <PrivateRoute path="/liked" element={<Liked />} />
@@ -27,6 +28,7 @@ export default function App() {
 
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
       {loading && (
         <div className="loader">

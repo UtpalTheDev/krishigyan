@@ -37,7 +37,7 @@ export default function History() {
           <>
             {" "}
             <div class="history-card">
-              <Link to={`/${item.id}`}>
+              <Link to={`/video/${item.id}`}>
                 <div
                   class="history-card-data"
                   onClick={() => {

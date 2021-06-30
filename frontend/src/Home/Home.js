@@ -25,7 +25,7 @@ export default function Home() {
         {filteredData.map((item) => {
           return (
             <>
-              <Link to={`${item.id}`}>
+              <Link to={`/video/${item.id}`}>
                 <div
                   onClick={() => {
                     history_video_add_call(
