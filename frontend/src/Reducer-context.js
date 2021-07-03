@@ -28,7 +28,7 @@ export function ReducerProvider({ children }) {
       loading
     },
     dispatch
-  ] = useReducer(reduce, {
+  ] = useReducer(reducer, {
     user: {},
     playlist: [],
     data: [],
@@ -109,7 +109,7 @@ export function useReduce() {
   return useContext(Reducercontext);
 }
 
-function reduce(state, action) {
+export function reducer(state, action) {
   switch (action.type) {
     case "LOAD":
       return { ...state, loading: action.payload };
@@ -169,12 +169,6 @@ function reduce(state, action) {
 
     case "NEW_PLAYLIST":
       let { id, name } = action.payload;
-      if (
-        state.playlist.find((item) => item.id === id || item.name === name) !==
-        undefined
-      ) {
-        return { ...state };
-      }
       return {
         ...state,
         playlist: [...state.playlist, action.payload]

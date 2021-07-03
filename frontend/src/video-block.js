@@ -1,5 +1,5 @@
 import { useReduce } from "./Reducer-context";
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { v4 as uuid } from "uuid";
 import { Navbar } from "./Navbar";
@@ -69,9 +69,9 @@ export default function VideoBlock() {
       </button>
     );
   }
-  useEffect(()=>{
-    videoobj===undefined && navigate("/404")
-  },[])
+  useEffect(() => {
+    videoobj === undefined && navigate("/404");
+  }, []);
   return (
     <>
       <Navbar />
@@ -80,7 +80,7 @@ export default function VideoBlock() {
           <span class="material-icons">home</span>
         </button>
       </Link>
-      {data.length > 0 && videoobj!==undefined && (
+      {data.length > 0 && videoobj !== undefined && (
         <div className="element-wrapper">
           <div className="iframe-wrapper">
             <iframe
@@ -125,7 +125,7 @@ export default function VideoBlock() {
               .map((item) => {
                 return (
                   <>
-                    <Link to={`/${item.id}`} className="recommend">
+                    <Link to={`/video/${item.id}`} className="recommend">
                       <div className="recommend-flexwrapper">
                         <div className="image-wrapper">
                           <img
@@ -140,7 +140,7 @@ export default function VideoBlock() {
                                 dispatch
                               );
                             }}
-                            alt="f"
+                            alt="videoimg"
                           />
                           <div className="recommendcard-duration md">
                             {item.duration}
