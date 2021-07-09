@@ -1,7 +1,7 @@
-import { useReduce } from "./Reducer-context";
-import { category } from "./Reducer-context";
+import { useReduce, category } from "../reducer-context/Reducer-context";
+// import { category } from "./Reducer-context";
 
-export default function Filter({ setshowfilter }) {
+export function Filter({ setshowfilter }) {
   let { dispatch, showCategory } = useReduce();
   return (
     <>

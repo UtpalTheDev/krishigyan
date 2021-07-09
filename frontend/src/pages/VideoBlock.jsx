@@ -1,10 +1,9 @@
-import { useReduce } from "./Reducer-context";
+import { useReduce } from "../reducer-context/Reducer-context";
 import { useState, useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { v4 as uuid } from "uuid";
-import { Navbar } from "./Navbar";
-import axios from "axios";
-import { useLogin } from "./LoginContext";
+import { Navbar } from "../components";
+import { useLogin } from "../reducer-context/LoginContext";
 import { toast } from "react-toastify";
 
 import {
@@ -13,9 +12,9 @@ import {
   history_video_add_call,
   playlist_add_call,
   playlist_video_add_call
-} from "./api/serverRequests";
+} from "../api/serverRequests";
 
-export default function VideoBlock() {
+export function VideoBlock() {
   let { videoId } = useParams();
   const navigate = useNavigate();
   const [showmodal, setshowmodal] = useState(false);

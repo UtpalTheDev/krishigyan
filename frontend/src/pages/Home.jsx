@@ -1,13 +1,13 @@
-import { useReduce } from "../Reducer-context";
+import { useReduce } from "../reducer-context/Reducer-context";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
-import { Navbar } from "../Navbar";
+import { Navbar,Navigator } from "../components";
 import { getSortedData, getFilteredData } from "../App";
-import Navigator from "../Navigator";
-import { useLogin } from "../LoginContext";
+
+import { useLogin } from "../reducer-context/LoginContext";
 import { history_video_add_call } from "../api/serverRequests";
 
-export default function Home() {
+export function Home() {
   const { data, dispatch, sortBy, showCategory } = useReduce();
   const { isUserLogIn } = useLogin();
   useEffect(() => {

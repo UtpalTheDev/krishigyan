@@ -1,16 +1,16 @@
-import { useReduce } from "../Reducer-context";
+import { useReduce } from "../reducer-context/Reducer-context";
 import { useEffect, useState } from "react";
 import { getSortedData, getFilteredData } from "../App";
-import Navigator from "../Navigator";
+// import Navigator from "../Navigator";
 import { Link } from "react-router-dom";
-import { Navbar } from "../Navbar";
+import { Navbar, Navigator } from "../components";
 import { toast } from "react-toastify";
 import {
   playlist_delete_call,
   playlist_video_delete_call
 } from "../api/serverRequests";
 
-export default function Playlist() {
+export function Playlist() {
   let { data, playlist, dispatch, sortBy, showCategory } = useReduce();
 
   const [currentplaylist, setplaylist] = useState(0);

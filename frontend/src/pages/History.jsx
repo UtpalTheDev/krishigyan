@@ -1,17 +1,17 @@
-import { useReduce } from "../Reducer-context";
+import { useReduce } from "../reducer-context/Reducer-context";
 import TimeAgo from "react-timeago";
 import { getSortedData, getFilteredData } from "../App";
-import Navigator from "../Navigator";
+import { Navigator, Navbar } from "../components";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
-import { Navbar } from "../Navbar";
+// import { Navbar } from "../Navbar";
 import {
   history_video_add_call,
   history_video_delete_call
 } from "../api/serverRequests";
 
-export default function History() {
+export function History() {
   useEffect(() => {
     dispatch({ type: "CLEAR_FILTER" });
   }, []);

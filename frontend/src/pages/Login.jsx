@@ -1,10 +1,10 @@
-import { useLogin } from "./LoginContext";
+import { useLogin } from "../reducer-context/LoginContext";
 import { useNavigate, useLocation, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import treebanner from "./assets/treebanner.png";
-import { Navbar } from "./Navbar";
+import treebanner from "../assets/treebanner.png";
+import { Navbar } from "../components";
 
-export default function Login() {
+export function Login() {
   let { isUserLogIn, LoginWithCredentials } = useLogin();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

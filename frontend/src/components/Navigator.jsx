@@ -1,10 +1,10 @@
-import { useReduce } from "./Reducer-context";
+import { useReduce } from "../reducer-context/Reducer-context";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import Sort from "./Sort";
-import Filter from "./Filter";
+import { Sort } from "./Sort";
+import { Filter } from "./Filter";
 
-export default function Navigator({ value }) {
+export function Navigator({ value }) {
   let { dispatch } = useReduce();
 
   const [showsort, setshowsort] = useState(false);

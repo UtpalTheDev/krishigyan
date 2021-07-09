@@ -1,10 +1,10 @@
-import { useLogin } from "./LoginContext";
+import { useLogin } from "../reducer-context/LoginContext";
 import { useNavigate, useLocation, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import treebanner from "./assets/treebanner.png";
-import { Navbar } from "./Navbar";
-export default function Signup() {
+import treebanner from "../assets/treebanner.png";
+import { Navbar } from "../components";
+export function Signup() {
   let { isUserLogIn } = useLogin();
   let [error, setError] = useState("");
   const [userName, setUserName] = useState("");
