@@ -75,7 +75,7 @@ export function Login() {
               </button>
             </div>
           </form>
-          <div style={{ color: "red" }}>{error}</div>
+          <div style={{ color: "red",paddingBottom:"2rem" }}>{error}</div>
         </div>
       </div>
     </>
