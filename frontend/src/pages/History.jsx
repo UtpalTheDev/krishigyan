@@ -5,7 +5,6 @@ import { Navigator, Navbar } from "../components";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
-// import { Navbar } from "../Navbar";
 import {
   history_video_add_call,
   history_video_delete_call

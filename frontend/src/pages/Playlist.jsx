@@ -1,7 +1,6 @@
 import { useReduce } from "../reducer-context/Reducer-context";
 import { useEffect, useState } from "react";
 import { getSortedData, getFilteredData } from "../App";
-// import Navigator from "../Navigator";
 import { Link } from "react-router-dom";
 import { Navbar, Navigator } from "../components";
 import { toast } from "react-toastify";

@@ -12,7 +12,6 @@ export async function history_video_add_call(url, payload, dispatch) {
     }
     dispatch({ type: "LOAD", payload: false });
   } catch (err) {
-    // console.log("history", err);
     dispatch({ type: "LOAD", payload: false });
   }
 }
@@ -29,7 +28,6 @@ export async function history_video_delete_call(url, payload, dispatch) {
       return "removed from history";
     }
   } catch (err) {
-    // console.log(err);
     dispatch({ type: "LOAD", payload: false });
     return "not able to remove from history";
   }
@@ -47,7 +45,6 @@ export async function liked_video_add_call(url, payload, dispatch) {
       return "you have liked the video";
     }
   } catch (err) {
-    // console.log(err);
     dispatch({ type: "LOAD", payload: false });
     return "not able to like the video";
   }
@@ -65,7 +62,6 @@ export async function liked_video_delete_call(url, payload, dispatch) {
       return "you have removed like";
     }
   } catch (err) {
-    // console.log(err);
     dispatch({ type: "LOAD", payload: false });
     return "not able to remove like";
   }
@@ -83,7 +79,6 @@ export async function playlist_add_call(url, payload, dispatch) {
       return "playlist created";
     }
   } catch (err) {
-    // console.log(err);
     dispatch({ type: "LOAD", payload: false });
     return "not able to create playlist";
   }
@@ -101,7 +96,6 @@ export async function playlist_video_add_call(url, payload, dispatch) {
       return "video added to playlist";
     }
   } catch (err) {
-    // console.log(err);
     dispatch({ type: "LOAD", payload: false });
     return "not able to add to playlist";
   }
@@ -119,7 +113,6 @@ export async function playlist_video_delete_call(url, payload, dispatch) {
       return "video removed from playlist";
     }
   } catch (err) {
-    // console.log(err);
     dispatch({ type: "LOAD", payload: false });
     return "not able to remove from playlist";
   }
@@ -137,7 +130,6 @@ export async function playlist_delete_call(url, payload, dispatch) {
       return "playlist deleted";
     }
   } catch (err) {
-    // console.log(err);
     dispatch({ type: "LOAD", payload: false });
     return "not able to delete playlist";
   }

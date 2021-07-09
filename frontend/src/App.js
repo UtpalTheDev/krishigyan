@@ -4,16 +4,8 @@ import Loader from "react-loader-spinner";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useReduce } from "./reducer-context/Reducer-context";
-// import VideoBlock from "./video-block";
-// import {Home} from "./pages";
-// import Playlist from "./Playlist/Playlist";
-// import History from "./History/History";
-// import Liked from "./Liked/Liked";
 import PrivateRoute from "./PrivateRoute";
-// import Login from "./Login";
-// import Signup from "./Signup";
-// import User from "./User";
-// import NotFound from "./NotFound";
+
 import {
   VideoBlock,
   Home,

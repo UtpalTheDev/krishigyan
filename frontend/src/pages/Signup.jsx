@@ -12,7 +12,6 @@ export function Signup() {
   const [password, setPassword] = useState("");
   let navigate = useNavigate();
   let { state } = useLocation();
-  console.log("form", state);
 
   useEffect(() => {
     if (isUserLogIn) {

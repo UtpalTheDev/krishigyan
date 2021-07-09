@@ -3,7 +3,6 @@ import { useLogin } from "./reducer-context/LoginContext";
 
 export default function PrivateRoute({ path, ...props }) {
   const { isUserLogIn } = useLogin();
-  console.log("privateroute");
   return isUserLogIn ? (
     <Route {...props} path={path} />
   ) : (

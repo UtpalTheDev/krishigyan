@@ -1,5 +1,4 @@
 import { useReduce, category } from "../reducer-context/Reducer-context";
-// import { category } from "./Reducer-context";
 
 export function Filter({ setshowfilter }) {
   let { dispatch, showCategory } = useReduce();

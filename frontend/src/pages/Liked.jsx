@@ -3,7 +3,6 @@ import { getSortedData, getFilteredData } from "../App";
 import { Navigator, Navbar } from "../components";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
-// import { Navbar } from "../Navbar";
 import { toast } from "react-toastify";
 import {
   history_video_add_call,
