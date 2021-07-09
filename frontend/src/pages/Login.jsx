@@ -3,11 +3,12 @@ import { useNavigate, useLocation, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import treebanner from "../assets/treebanner.png";
 import { Navbar } from "../components";
-
+import { useReduce } from "../reducer-context/Reducer-context";
 export function Login() {
   let { isUserLogIn, LoginWithCredentials } = useLogin();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const {dispatch}=useReduce()
   let navigate = useNavigate();
   let { state } = useLocation();
   let [error, setError] = useState("");
@@ -18,8 +19,10 @@ export function Login() {
   }, [isUserLogIn]);
 
   async function LoginHandler() {
+    dispatch({type:"LOAD",payload:true})
     let errorpassed = await LoginWithCredentials(email, password);
     setError(errorpassed);
+    dispatch({type:"LOAD",payload:false})
   }
   return (
     <>
