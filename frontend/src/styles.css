@@ -76,7 +76,6 @@ h6 {
 .icon-button {
   margin: 0;
 }
-
 .iframe {
   width: 100%;
   height: 57vw;
@@ -158,7 +157,6 @@ button {
 }
 .playlist-card {
   display: flex;
-
   margin: 0.4rem 0 0.4rem 0;
 }
 .playlist-card-data {
