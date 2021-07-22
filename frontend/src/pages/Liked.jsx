@@ -29,8 +29,8 @@ export function Liked() {
   function Likedlist() {
     return filteredData.map((item) => {
       return (
-        <>
-          <div className="likedlist-card">
+        
+          <div key={item.id} className="likedlist-card">
             <Link to={`/video/${item.id}`}>
               <div
                 className="likedlist-card-data"
@@ -53,7 +53,7 @@ export function Liked() {
               </div>
             </Link>
             <button
-              class="icon-button lg"
+              className="icon-button lg"
               onClick={async () => {
                 let likedlistmsg = await liked_video_delete_call(
                   "https://videolib-demo-1.utpalpati.repl.co/liked/",
@@ -64,10 +64,10 @@ export function Liked() {
                 notify();
               }}
             >
-              <i class="far fa-thumbs-down"></i>
+              <i className="far fa-thumbs-down"></i>
             </button>
           </div>
-        </>
+        
       );
     });
   }

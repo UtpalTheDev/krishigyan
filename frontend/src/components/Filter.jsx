@@ -4,15 +4,15 @@ export function Filter({ setshowfilter }) {
   let { dispatch, showCategory } = useReduce();
   return (
     <>
-      <ul class="list filterlist">
-        {Object.keys(category).map((item) => {
+      <ul className="list filterlist">
+        {Object.keys(category).map((item,index) => {
           return (
             <>
-              <div>{item}</div>
+              <div key={index} style={{paddingLeft:"0.3rem"}}>{item}</div>
               {category[item].map((item1) => {
                 return (
-                  <>
-                    <li>
+                  
+                    <li key={item1}>
                       <input
                         type="checkbox"
                         style={{ cursor: "pointer" }}
@@ -26,7 +26,7 @@ export function Filter({ setshowfilter }) {
                       />
                       {item1}
                     </li>
-                  </>
+                  
                 );
               })}
             </>
@@ -34,7 +34,7 @@ export function Filter({ setshowfilter }) {
         })}
       </ul>
       <button
-        class="primary-button lg filterapply"
+        className="primary-button lg filterapply"
         onClick={() => setshowfilter((prev) => !prev)}
       >
         Apply

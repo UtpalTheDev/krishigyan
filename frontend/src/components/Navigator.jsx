@@ -15,7 +15,7 @@ export function Navigator({ value }) {
         <Link to="/">
           {" "}
           <button style={{ background: value === "home" ? "#f2f2f2" : "" }}>
-            <span class="material-icons">home</span>
+            <span className="material-icons">home</span>
             <br />
             Home
           </button>
@@ -23,7 +23,7 @@ export function Navigator({ value }) {
         <Link to="/playlist">
           {" "}
           <button style={{ background: value === "playlist" ? "#f2f2f2" : "" }}>
-            <span class="material-icons">video_library</span>
+            <span className="material-icons">video_library</span>
             <br />
             Playlist
           </button>
@@ -32,7 +32,7 @@ export function Navigator({ value }) {
         <Link to="/liked">
           {" "}
           <button style={{ background: value === "liked" ? "#f2f2f2" : "" }}>
-            <span class="material-icons">thumb_up_alt</span>
+            <span className="material-icons">thumb_up_alt</span>
             <br />
             Liked
           </button>
@@ -41,7 +41,7 @@ export function Navigator({ value }) {
         <Link to="/history">
           {" "}
           <button style={{ background: value === "history" ? "#f2f2f2" : "" }}>
-            <span class="material-icons">history</span>
+            <span className="material-icons">history</span>
             <br />
             History
           </button>
@@ -49,14 +49,14 @@ export function Navigator({ value }) {
 
         <Link to="">
           <button onClick={() => setshowsort((prev) => !prev)}>
-            <span class="material-icons">import_export</span>
+            <span className="material-icons">import_export</span>
             <br />
             Sort
           </button>
         </Link>
         <Link to="">
           <button onClick={() => setshowfilter((prev) => !prev)}>
-            <span class="material-icons">filter_alt</span>
+            <span className="material-icons">filter_alt</span>
             <br />
             Filter
           </button>

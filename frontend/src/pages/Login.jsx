@@ -47,33 +47,33 @@ export function Login() {
             }}
             className="form"
           >
-            <label class="input md">
+            <label className="input md">
               <input
                 type="email"
                 onChange={(e) => {
                   setEmail(e.target.value);
                 }}
-                class="input-text"
+                className="input-text"
                 required
               />
-              <span class="placeholder">Email</span>
+              <span className="placeholder">Email</span>
             </label>
-            <label class="input md">
+            <label className="input md">
               <input
                 type="password"
                 onChange={(e) => {
                   setPassword(e.target.value);
                 }}
-                class="input-text"
+                className="input-text"
                 required
               />
-              <span class="placeholder">Password</span>
+              <span className="placeholder">Password</span>
             </label>
             <div className="form-action">
-              <button class="secondary-button md">
+              <button className="secondary-button md">
                 <Link to="/signup">Signup</Link>
               </button>
-              <button type="submit" class="secondary-button md">
+              <button type="submit" className="secondary-button md">
                 Login
               </button>
             </div>
