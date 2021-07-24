@@ -95,7 +95,10 @@ export function History() {
               top: "50%",
               left: "50%",
               transform: "translate(-50%,-50%)",
-              
+              width:"40%",
+              minWidth:"150px",
+              maxWidth:"300px",
+              textAlign:"center"
               
             }}
           >

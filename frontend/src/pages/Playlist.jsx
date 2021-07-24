@@ -148,14 +148,25 @@ export function Playlist() {
               : <div style={{position: "absolute",
               top: "50%",
               left: "50%",
-              transform: "translate(-50%,-50%)"}}>
+              transform: "translate(-50%,-50%)",
+              width:"20%",
+              minWidth:"150px",
+              maxWidth:"300px",
+              textAlign:"center"
+              }}>
                 <img src={noVideos} style={{borderRadius:"5%"}}/> 
                 You Have'nt Added Any Videos Yet.
                 </div>
             : <div style={{position: "fixed",
             top: "50%",
             left: "50%",
-            transform: "translate(-50%,-50%)"}}>
+            transform: "translate(-50%,-50%)",
+            width:"40%",
+            minWidth:"150px",
+            maxWidth:"300px",
+            textAlign:"center"
+            
+            }}>
               <img src={noVideos} style={{borderRadius:"5%"}}/> 
               You Have'nt Added Any Playlist Yet.
               </div>}
