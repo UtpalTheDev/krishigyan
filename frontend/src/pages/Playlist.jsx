@@ -29,9 +29,8 @@ export function Playlist() {
   function Showplaylist() {
     return filteredData.map((item) => {
       return (
-        <>
-          {" "}
-          <div className="playlist-card">
+        
+          <div key={item.id} className="playlist-card">
             <Link to={`/video/${item.id}`}>
               {" "}
               <div
@@ -54,7 +53,7 @@ export function Playlist() {
               </div>
             </Link>
             <button
-              class="icon-button lg"
+              className="icon-button lg"
               onClick={async () => {
                 let playlistmsg = await playlist_video_delete_call(
                   "https://videolib-demo-1.utpalpati.repl.co/playlist/video/",
@@ -68,10 +67,10 @@ export function Playlist() {
                 notify();
               }}
             >
-              <i class="fas fa-times"></i>
+              <i className="fas fa-times"></i>
             </button>
           </div>
-        </>
+        
       );
     });
   }
@@ -101,18 +100,19 @@ export function Playlist() {
             ? "Playlist Names"
             : "No Playlist Present"}
         </h4>
-        <ul class="list playlistname">
+        <ul className="list playlistname">
           {playlist.map((item, index) => {
             return (
-              <>
+              
                 <li
+                  key={item.id}
                   style={{
                     background: currentplaylist === index ? "#f2f2f2" : ""
                   }}
                 >
                   <div onClick={() => setplaylist(index)}>{item.name}</div>
                   <button
-                    class="icon-button md"
+                    className="icon-button md"
                     onClick={() => {
                       (async function () {
                         let playlistmsg = await playlist_delete_call(
@@ -126,15 +126,15 @@ export function Playlist() {
                       })();
                     }}
                   >
-                    <i class="fas fa-times"></i>
+                    <i className="fas fa-times"></i>
                   </button>
                 </li>
-              </>
+              
             );
           })}
         </ul>
 
-        <h3 class="">
+        <h3 className="">
           {playlist[currentplaylist] !== undefined
             ? `Playlist - ${playlist[currentplaylist].name}`
             : ""}

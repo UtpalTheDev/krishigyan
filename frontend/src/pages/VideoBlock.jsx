@@ -31,7 +31,7 @@ export function VideoBlock() {
         if (item === itempassed.id) {
           return (
             <button
-              class="icon-button md"
+              className="icon-button md"
               onClick={async () => {
                 let likedmsg = await liked_video_delete_call(
                   "https://videolib-demo-1.utpalpati.repl.co/liked/",
@@ -42,14 +42,14 @@ export function VideoBlock() {
                 notify();
               }}
             >
-              <span class="material-icons">thumb_up</span>Unlike
+              <span className="material-icons">thumb_up</span>Unlike
             </button>
           );
         }
         return defaultbutton;
       },
       <button
-        class="icon-button md"
+        className="icon-button md"
         onClick={async () => {
           if (isUserLogIn) {
             let likedmsg = await liked_video_add_call(
@@ -64,7 +64,7 @@ export function VideoBlock() {
           }
         }}
       >
-        <span class="material-icons">thumb_up_off_alt</span>Like
+        <span className="material-icons">thumb_up_off_alt</span>Like
       </button>
     );
   }
@@ -75,8 +75,8 @@ export function VideoBlock() {
     <>
       <Navbar />
       <Link to="/" className="home">
-        <button class="icon-button round lg">
-          <span class="material-icons">home</span>
+        <button className="icon-button round lg">
+          <span className="material-icons">home</span>
         </button>
       </Link>
       {data.length > 0 && videoobj !== undefined && (
@@ -86,17 +86,17 @@ export function VideoBlock() {
               height="200"
               src={`https://www.youtube.com/embed/${videoId}?rel=0&modestbranding=1&autohide=0&showinfo=0&watch-later=0&controls=captions`}
               title="YouTube video player"
-              frameborder="0"
-              allowfullscreen="allowFullscreen"
+              frameBorder="0"
+              allowFullScreen="allowFullscreen"
               className="iframe"
             ></iframe>
             <br />
-            <div class="xl video-title">{videoobj.title}</div>
+            <div className="xl video-title">{videoobj.title}</div>
             <div className="iframe-button">
               {Like_button(videoobj)}
 
               <button
-                class="icon-button md"
+                className="icon-button md"
                 onClick={() => {
                   if (isUserLogIn) {
                     setshowmodal((prev) => !prev);
@@ -105,7 +105,7 @@ export function VideoBlock() {
                   }
                 }}
               >
-                <span class="material-icons">playlist_add</span>Save
+                <span className="material-icons">playlist_add</span>Save
               </button>
             </div>
           </div>
@@ -123,8 +123,8 @@ export function VideoBlock() {
               )
               .map((item) => {
                 return (
-                  <>
-                    <Link to={`/video/${item.id}`} className="recommend">
+                  
+                    <Link key={item.id} to={`/video/${item.id}`} className="recommend">
                       <div className="recommend-flexwrapper">
                         <div className="image-wrapper">
                           <img
@@ -152,7 +152,7 @@ export function VideoBlock() {
                         </div>
                       </div>
                     </Link>
-                  </>
+                  
                 );
               })}
           </div>
@@ -175,18 +175,19 @@ function PlaylistModal({ setshowmodal, videoId }) {
           <div className="modalheader">
             <div>Save to...</div>
             <button
-              class="icon-button sm"
+              className="icon-button sm"
               onClick={() => setshowmodal((prev) => !prev)}
             >
-              <i class="fas fa-times"></i>
+              <i className="fas fa-times"></i>
             </button>
           </div>
 
-          <ul class="list">
+          <ul className="list">
             {playlist.map((item) => {
               return (
-                <>
+                
                   <li
+                    key={item.id}
                     onClick={async () => {
                       let playlistmsg = await playlist_video_add_call(
                         "https://videolib-demo-1.utpalpati.repl.co/playlist/video",
@@ -204,12 +205,12 @@ function PlaylistModal({ setshowmodal, videoId }) {
                     <span>{item.name}</span>
                     {item.videos.reduce((total, item1) => {
                       if (item1 === videoId) {
-                        return <i class="fas fa-check-circle"></i>;
+                        return <i className="fas fa-check-circle"></i>;
                       }
                       return total;
-                    }, <i class="fas fa-plus"></i>)}
+                    }, <i className="fas fa-plus"></i>)}
                   </li>
-                </>
+                
               );
             })}
           </ul>
@@ -229,21 +230,21 @@ function PlaylistModal({ setshowmodal, videoId }) {
                 textAlign: "center"
               }}
             >
-              <label class="input md">
+              <label className="input md">
                 <input
                   type="text"
-                  class="input-text"
+                  className="input-text"
                   onChange={(event) => setnewplaylist(event.target.value)}
                   value={newplaylist}
                   required
                   style={{ width: "90%" }}
                 />
 
-                <span class="placeholder">Enter Playlist Name</span>
+                <span className="placeholder">Enter Playlist Name</span>
               </label>
 
               <button
-                class="secondary-button"
+                className="secondary-button"
                 onClick={async () => {
                   if (newplaylist !== "") {
                     let playlistmsg = await playlist_add_call(

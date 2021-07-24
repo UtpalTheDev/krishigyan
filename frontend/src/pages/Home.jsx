@@ -24,8 +24,8 @@ export function Home() {
       <div className="videos">
         {filteredData.map((item) => {
           return (
-            <>
-              <Link to={`/video/${item.id}`}>
+            
+              <Link key={item.id} to={`/video/${item.id}`}>
                 <div
                   onClick={() => {
                     history_video_add_call(
@@ -52,7 +52,7 @@ export function Home() {
                   </div>
                 </div>
               </Link>
-            </>
+            
           );
         })}
       </div>

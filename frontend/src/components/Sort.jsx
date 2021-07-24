@@ -6,7 +6,7 @@ export function Sort({ setshowsort }) {
   return (
     <>
       <div className="sortblock">
-        <ul class="sortlist">
+        <ul className="sortlist">
           <li>
             <div
               style={{

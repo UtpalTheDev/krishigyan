@@ -33,12 +33,11 @@ export function History() {
       .filter((item) => item.ishistory !== false)
       .map((item) => {
         return (
-          <>
-            {" "}
-            <div class="history-card">
+          
+            <div key={item.id} className="history-card">
               <Link to={`/video/${item.id}`}>
                 <div
-                  class="history-card-data"
+                  className="history-card-data"
                   onClick={() => {
                     history_video_add_call(
                       "https://videolib-demo-1.utpalpati.repl.co/history/",
@@ -62,7 +61,7 @@ export function History() {
                 </div>
               </Link>
               <button
-                class="icon-button lg"
+                className="icon-button lg"
                 onClick={async () => {
                   let historymsg = await history_video_delete_call(
                     "https://videolib-demo-1.utpalpati.repl.co/history/",
@@ -73,10 +72,10 @@ export function History() {
                   notify();
                 }}
               >
-                <i class="fas fa-trash-alt"></i>
+                <i className="fas fa-trash-alt"></i>
               </button>
             </div>
-          </>
+          
         );
       });
   }
