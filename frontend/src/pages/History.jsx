@@ -1,4 +1,5 @@
 import { useReduce } from "../reducer-context/Reducer-context";
+import noHistory from "../assets/empty.svg";
 import TimeAgo from "react-timeago";
 import { getSortedData, getFilteredData } from "../App";
 import { Navigator, Navbar } from "../components";
@@ -86,16 +87,19 @@ export function History() {
       <Navigator value="history" />
 
       <div className="wrapper historywrapper">
-        <h6>History</h6>
+        <h3>History</h3>
         {History().length === 0 ? (
           <div
             style={{
               position: "fixed",
               top: "50%",
               left: "50%",
-              transform: "translate(-50%,-50%)"
+              transform: "translate(-50%,-50%)",
+              
+              
             }}
           >
+            <img src={noHistory} style={{borderRadius:"5%"}}/>
             You Haven't Watched Any Video
           </div>
         ) : (

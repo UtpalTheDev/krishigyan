@@ -1,5 +1,6 @@
 import { useReduce } from "../reducer-context/Reducer-context";
 import { getSortedData, getFilteredData } from "../App";
+import noVideos from "../assets/empty.svg";
 import { Navigator, Navbar } from "../components";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
@@ -79,16 +80,18 @@ export function Liked() {
       <Navigator value="liked" />
 
       <div className="wrapper likedwrapper">
-        <h6>Liked Videos</h6>
+        <h3>Liked Videos</h3>
         {Likedlist().length === 0 ? (
           <div
             style={{
               position: "fixed",
               top: "50%",
               left: "50%",
-              transform: "translate(-50%,-50%)"
+              transform: "translate(-50%,-50%)",
             }}
           >
+            <img src={noVideos} style={{borderRadius:"5%",width:"100%" }}/>
+              
             You Haven't Liked Any Video
           </div>
         ) : (

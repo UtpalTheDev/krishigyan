@@ -1,7 +1,7 @@
 import { useLogin } from "../reducer-context/LoginContext";
 import { useNavigate, useLocation, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import treebanner from "../assets/treebanner.png";
+import treebanner from "../assets/treebanner.svg";
 import { Navbar } from "../components";
 import { useReduce } from "../reducer-context/Reducer-context";
 export function Login() {

@@ -1,5 +1,6 @@
 import { useReduce } from "../reducer-context/Reducer-context";
 import { useEffect, useState } from "react";
+import noVideos from "../assets/empty.svg";
 import { getSortedData, getFilteredData } from "../App";
 import { Link } from "react-router-dom";
 import { Navbar, Navigator } from "../components";
@@ -95,11 +96,11 @@ export function Playlist() {
       <Navbar />
       <Navigator value="playlist" />
       <div className="wrapper">
-        <h4>
+        <h3>
           {playlist[currentplaylist] !== undefined
             ? "Playlist Names"
             : "No Playlist Present"}
-        </h4>
+        </h3>
         <ul className="list playlistname">
           {playlist.map((item, index) => {
             return (
@@ -140,12 +141,24 @@ export function Playlist() {
             : ""}
         </h3>
 
-        <div className="playlistitem">
+        <div className="playlistitem" style={{position:"relative"}}>
           {playlist[currentplaylist] !== undefined
             ? playlist[currentplaylist].videos.length !== 0
               ? Showplaylist()
-              : ""
-            : ""}
+              : <div style={{position: "absolute",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%,-50%)"}}>
+                <img src={noVideos} style={{borderRadius:"5%"}}/> 
+                You Have'nt Added Any Videos Yet.
+                </div>
+            : <div style={{position: "fixed",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%,-50%)"}}>
+              <img src={noVideos} style={{borderRadius:"5%"}}/> 
+              You Have'nt Added Any Playlist Yet.
+              </div>}
         </div>
       </div>
     </>
