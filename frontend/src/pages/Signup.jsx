@@ -67,8 +67,9 @@ export function Signup() {
                 className="input-text"
                 required
               />
-              <span className="placeholder">Name</span>
+              <span className="placeholder">User Name</span>
             </label>
+            <div className="sm gray centertxt">User Name should contain atleast 6 characters</div>
             <label className="input md">
               <input
                 type="email"
@@ -91,16 +92,19 @@ export function Signup() {
               />
               <span className="placeholder">password</span>
             </label>
+            <div className="sm gray centertxt">Password should contain atleast 6 characters</div>
             <div className="form-action">
-              <button className="secondary-button md">
-                <Link to="/login">Login</Link>
-              </button>
               <button type="submit" className="secondary-button md">
                 Signup
               </button>
             </div>
+            <hr/>
+          <div className="md centertxt">
+          Have an account? 
+              <Link to="/login" style={{color:"blue"}}> Log in now</Link>
+            </div>
           </form>
-          <div style={{ color: "red" }}>{error}</div>
+          <div style={{ color: "red",textAlign:"center",padding:"0.5rem 0" }}>{error}</div>
         </div>
       </div>
     </>
