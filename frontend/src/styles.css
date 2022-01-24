@@ -1,0 +1,703 @@
+@import "https://eklavyacss.netlify.app/base.css";
+@import "https://use.fontawesome.com/releases/v5.15.3/css/all.css";
+@import "https://fonts.googleapis.com/icon?family=Material+Icons";
+@import "https://fonts.googleapis.com/icon?family=Material+Icons+Outlined";
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  padding-left: 0.2rem;
+}
+.loader {
+  position: fixed;
+  top: 0;
+  z-index: 10;
+  background: rgb(255, 255, 255, 0.87);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+}
+
+/*----------------videoblock----------------*/
+.playlistmodal {
+  position: fixed;
+  background: rgba(0, 0, 0, 0.4);
+  height: 100%;
+  width: 100%;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column;
+  z-index: 2;
+}
+.list {
+  max-height: 100px;
+  overflow: auto;
+}
+.list > li {
+  cursor: pointer;
+  border-bottom: 1px solid #e2e2e2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  padding: 0 0 0 0.3em;
+}
+.list > li:hover {
+  background: #e2e2e2;
+}
+.playlistmodal > div {
+  background: white;
+  min-width: 250px;
+  border-radius: 1rem;
+}
+.createplaylist {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+.modalheader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.icon-button {
+  margin: 0;
+}
+.iframe {
+  width: 100%;
+  height: 57vw;
+}
+.iframe-button {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 1rem;
+}
+.iframe-button > .icon-button.md {
+  height: auto;
+}
+.iframe-button > button {
+  margin: 0 0.5rem;
+}
+.video-title {
+  padding: 0 0 0 0.3em;
+  margin-top: 1rem;
+}
+.modalheader > div {
+  padding: 0 0 0 0.3em;
+}
+
+.element-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  margin-bottom: 4rem;
+}
+.iframe-wrapper {
+  margin-bottom: 2rem;
+}
+.home {
+  position: fixed;
+  left: 52%;
+  bottom: 1%;
+  z-index: 3;
+  transform: translateX(-50%);
+}
+/*-----------------playlist---------*/
+
+.playlistname {
+  width: 100%;
+  max-height: 20vh;
+  overflow: auto;
+}
+.playlistname div {
+  width: 100%;
+  height: inherit;
+  display: flex;
+  align-items: center;
+  line-height: 2;
+}
+.playlistitem {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+.playlistitem > a {
+  max-height: 112px;
+  display: block;
+  margin: 1rem 0;
+}
+.playlistitem > a:last-child {
+  margin-bottom: 4rem;
+}
+button {
+  cursor: pointer;
+}
+
+.playlistname .icon-button:hover,
+.playlist-card button:hover {
+  transform: scale(1.2);
+}
+.playlistname .icon-button {
+  margin: 0;
+}
+.playlistname li {
+  align-items: baseline;
+}
+.playlist-card {
+  display: flex;
+  margin: 0.4rem 0 0.4rem 0;
+}
+.playlist-card-data {
+  display: flex;
+}
+.playlist-card-data > img {
+  width: 50%;
+  min-width: 130px;
+  max-width: 200px;
+  flex: 1;
+}
+.playlist-card-desc {
+  font-size: inherit;
+  overflow: hidden;
+  height: 20px;
+  flex: 2;
+  padding-left: 0.5rem;
+}
+.playlist-card > a {
+  flex: 2;
+}
+.playlist-card button {
+  align-self: center;
+  margin: 0 1% 0 1%;
+}
+
+/*---------------likedlist-----------*/
+.likedlist-card {
+  display: flex;
+  height: 30%;
+  margin: 0.4rem 0 0.4rem 0;
+}
+.likedlist-card-data {
+  display: flex;
+}
+.likedlist-card > a {
+  flex: 2;
+}
+.likedlist-card-data > img {
+  width: 50%;
+  min-width: 130px;
+  max-width: 200px;
+  flex: 1;
+}
+.likedlist-card-desc {
+  font-size: inherit;
+  overflow: hidden;
+  height: 20px;
+  flex: 2;
+  padding-left: 0.5rem;
+}
+.likedlist-card button {
+  align-self: center;
+  margin: 0 1% 0 1%;
+}
+
+/*---------------------------history--------------------*/
+
+.history-card {
+  display: flex;
+  height: 30%;
+  margin: 0.4rem 0 0.4rem 0;
+  position: relative;
+}
+.history-card-data {
+  display: flex;
+}
+.history-card > a {
+  flex: 2;
+}
+.history-card-data > img {
+  width: 50%;
+  min-width: 130px;
+  max-width: 200px;
+  flex: 1;
+}
+.history-card-desc {
+  font-size: inherit;
+  overflow: hidden;
+  height: 20px;
+  flex: 2;
+  padding-left: 0.5rem;
+}
+.history-card button {
+  align-self: center;
+  margin: 0 1% 0 1%;
+}
+.watchedbefore {
+  position: absolute;
+  right: 1%;
+  bottom: 0;
+}
+
+/*------------------------------home-----------------*/
+
+.videos {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: center;
+  margin-bottom: 4rem;
+}
+.videos > a {
+  width: 100%;
+  margin: 3% 0;
+  text-decoration: none;
+  color: inherit;
+}
+.image-wrapper > img {
+  width: 100%;
+}
+.videos-desc {
+  width: 100%;
+}
+.videos-title {
+  width: 98.6%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.5;
+  padding: 0 0 0 0.3em;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+.videos-duration {
+  position: absolute;
+  bottom: 4%;
+  right: 0;
+  color: white;
+  background: black;
+  border-radius: 0.5rem 0 0 0.5rem;
+  padding: 0.1em 0.3em;
+}
+.image-wrapper {
+  position: relative;
+  width: 100%;
+}
+.sortpopup {
+  position: fixed;
+  bottom: 0px;
+  width: 100%;
+  height: 100vh;
+  display: none;
+  z-index: 3;
+  background: rgba(0, 0, 0, 0.4);
+}
+.filterpopup {
+  position: fixed;
+  bottom: 0px;
+  width: 100%;
+  height: 100vh;
+  display: none;
+  z-index: 3;
+  background: white;
+}
+.filterpopup > .list {
+  max-height: 95vh;
+}
+.filterapply {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+.navigator {
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  z-index: 2;
+  display: flex;
+}
+.navigator > a {
+  width: 100%;
+}
+.navigator > a > button {
+  width: 100%;
+  background: white;
+  font-size: 0.6em;
+  cursor: pointer;
+  border: 1px solid #e2e2f2;
+  padding: 0.5em 0;
+}
+.navigator a:first-child button {
+  border-radius: 40% 0 0 0;
+}
+.navigator a:last-child button {
+  border-radius: 0 40% 0 0;
+}
+/*-------------------------Sort-------------------*/
+
+.sortblock {
+  position: fixed;
+  bottom: 0;
+  height: max-content;
+  width: 100%;
+  background: white;
+}
+.list.sortlist > li {
+  cursor: "load";
+}
+.sortlist {
+  max-height: 100px;
+  overflow: auto;
+  padding: 0;
+}
+.sortlist > li {
+  cursor: pointer;
+  border-bottom: 1px solid #e2e2e2;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  position: relative;
+}
+.sortlist > li:hover {
+  background: #e2e2e2;
+}
+
+/*----------recommended---------------------*/
+.recommends {
+  display: flex;
+  flex-flow: column;
+}
+.recommend {
+  width: 100%;
+  margin: 3% 0;
+  text-decoration: none;
+  color: inherit;
+}
+.recommendcard-desc {
+  width: 100%;
+}
+.recommendcard-title {
+  width: 98.6%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  padding: 0 0 0 0.3em;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+.recommendcard-duration {
+  position: absolute;
+  bottom: 4%;
+  right: 0;
+  color: white;
+  background: black;
+  border-radius: 0.5rem 0 0 0.5rem;
+  padding: 0.1em 0.3em;
+}
+/*------------navbar----------------------*/
+
+.videonavbar {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: white;
+  width: 100%;
+  height: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.videonavbar-search {
+  display: flex;
+  border: 1px solid #cecece;
+  background: #f9f9f9;
+}
+.videonavbar-search > input {
+  width: 400px;
+  background: white;
+  border: none;
+  padding: 0 0.5rem;
+}
+.videonavbar-search > input::placeholder {
+  font-weight: 500;
+  font-size: 16px;
+}
+.videonavbar-logo {
+  margin-left: 0.5rem;
+  height: inherit;
+  font-weight: 400;
+  font-size: 18px;
+}
+.videonavbar-logo > span {
+  font-size: 22px;
+  font-weight: 400;
+}
+.videonavbar-logo > img {
+  height: 80%;
+  transform: translateY(+16%);
+}
+.videonavbar-search > span {
+  padding: 0.1rem 1rem;
+  border-left: 1px solid #cecece;
+  cursor: pointer;
+}
+.videonavbar-others {
+  margin-right: 1rem;
+  display: flex;
+}
+
+/*-------------------filter----------------*/
+
+.filterlist > li:last-child {
+  margin-bottom: 5rem;
+}
+.filterlist > li {
+  justify-content: start;
+}
+/*-----------------------login----------------*/
+.login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 89vh;
+  flex-wrap: wrap;
+}
+.login-sideimg {
+  height: 100%;
+  flex: 3;
+  min-width: 300px;
+}
+.form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 0rem 2rem;
+  flex: 2;
+}
+.form {
+  width: 200px;
+}
+.form-action {
+  display: flex;
+  justify-content: center;
+}
+.form label {
+  width: 100%;
+  box-sizing: border-box;
+  height: 80px;
+}
+.input.md > .input-text {
+  width: 100%;
+  box-sizing: border-box;
+  height: 30px;
+}
+
+/*------------------------signup----------------------*/
+
+.signup {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 89vh;
+  flex-wrap: wrap;
+}
+.signup-sideimg {
+  height: 100%;
+  flex: 3;
+  min-width: 300px;
+}
+/*-------------------------user--------------------*/
+.user {
+  display: flex;
+  justify-content: center;
+  margin-top: 5rem;
+}
+.user-data {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.user-logout {
+  position: fixed;
+  top: 10%;
+  right: 2%;
+}
+
+/*-----------404--------*/
+
+.notfound {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: white;
+}
+.notfound > div {
+  font-size: 50px;
+  text-align: center;
+  font-weight: 700;
+}
+.notfound > div > a {
+  font-size: 18px;
+  text-decoration: underline;
+}
+/*----------------media query----------------*/
+@media only screen and (max-width: 500px) {
+  .videonavbar-search > input {
+    display: none;
+  }
+  .videonavbar-search > span {
+    padding: 0 1rem;
+    border-left: none;
+    cursor: pointer;
+  }
+  .videonavbar-search {
+    background: white;
+    border: none;
+  }
+  .videonavbar-logo {
+    margin-left: 0.2rem;
+    flex-grow: 2;
+  }
+  .recommends {
+    width: 100%;
+  }
+  .iframe-wrapper {
+    width: 100%;
+  }
+  .playlistitem {
+    height: 42vh;
+  }
+  .historywrapper > div:last-child {
+    margin-bottom: 5rem;
+  }
+  .likedwrapper > div:last-child {
+    margin-bottom: 5rem;
+  }
+}
+
+@media (min-width: 501px) and (max-width: 1024px) {
+  .videos > a {
+    width: 40%;
+    max-width: 250px;
+    margin: 2%;
+  }
+  .videonavbar-search > input {
+    width: 250px;
+  }
+
+  .recommend {
+    width: 100%;
+
+    display: block;
+  }
+  .recommends {
+    margin-left: 2rem;
+    width: 285px;
+  }
+  .iframe {
+    max-width: 100%;
+    max-height: 350px;
+  }
+  .iframe-wrapper {
+    width: 650px;
+    height: 400px;
+    margin-left: 1rem;
+  }
+  .recommend-flexwrapper {
+    display: flex;
+  }
+  .playlistitem {
+    height: 48vh;
+  }
+}
+@media only screen and (min-width: 1030px) {
+  .videos {
+    padding-left: 72px;
+    background: #f9f9f9;
+
+    margin-bottom: 0;
+    width: inherit;
+  }
+  .wrapper {
+    padding-left: 80px;
+  }
+  .videos > a {
+    width: 40%;
+    max-width: 250px;
+    margin: 1%;
+  }
+
+  .recommend {
+    width: 100%;
+    display: block;
+    max-width: 400px;
+  }
+  .recommends {
+    margin-left: 2rem;
+    width: 370px;
+  }
+  .iframe {
+    max-width: 100%;
+    max-height: 450px;
+  }
+  .iframe-wrapper {
+    width: 888px;
+
+    margin-left: 2rem;
+  }
+  .recommend-flexwrapper {
+    display: flex;
+  }
+  .navigator {
+    position: fixed;
+    width: 72px;
+    background: white;
+    top: 60px;
+    z-index: 2;
+    display: flex;
+    flex-flow: column;
+  }
+  .navigator > a {
+    width: 100%;
+    min-height: 74px;
+    display: flex;
+    text-decoration: none;
+  }
+  .navigator > a:hover {
+    background: #f2f2f2;
+  }
+  .navigator > a > button {
+    width: 100%;
+    background: transparent;
+    font-size: 0.6em;
+    cursor: pointer;
+    border: none;
+    padding: 0.5em 0;
+  }
+  .navigator a:first-child button {
+    border-radius: 40% 0 0 0;
+  }
+  .navigator a:last-child button {
+    border-radius: 0 40% 0 0;
+  }
+  .playlistitem {
+    height: 50vh;
+  }
+}
