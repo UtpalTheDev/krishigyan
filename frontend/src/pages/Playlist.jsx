@@ -57,7 +57,7 @@ export function Playlist() {
               className="icon-button lg"
               onClick={async () => {
                 let playlistmsg = await playlist_video_delete_call(
-                  "https://videolib-demo-1.utpalpati.repl.co/playlist/video/",
+                  `${process.env.REACT_APP_backend_url}/playlist/video/`,
                   {
                     playlistid: playlist[currentplaylist].id,
                     videoid: item.id
@@ -117,7 +117,7 @@ export function Playlist() {
                     onClick={() => {
                       (async function () {
                         let playlistmsg = await playlist_delete_call(
-                          "https://videolib-demo-1.utpalpati.repl.co/playlist/",
+                          `${process.env.REACT_APP_backend_url}/playlist/`,
                           { playlistid: item.id },
                           dispatch
                         );

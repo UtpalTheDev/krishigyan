@@ -41,7 +41,7 @@ export function History() {
                   className="history-card-data"
                   onClick={() => {
                     history_video_add_call(
-                      "https://videolib-demo-1.utpalpati.repl.co/history/",
+                      `${process.env.REACT_APP_backend_url}/history/`,
                       {
                         historyId: item.id,
                         lastseen: new Date()
@@ -65,7 +65,7 @@ export function History() {
                 className="icon-button lg"
                 onClick={async () => {
                   let historymsg = await history_video_delete_call(
-                    "https://videolib-demo-1.utpalpati.repl.co/history/",
+                    `${process.env.REACT_APP_backend_url}/history/`,
                     { historyId: item.id },
                     dispatch
                   );

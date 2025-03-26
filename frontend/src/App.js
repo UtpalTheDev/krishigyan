@@ -1,6 +1,6 @@
 import "./styles.css";
 import { Routes, Route } from "react-router-dom";
-import Loader from "react-loader-spinner";
+import {BallTriangle} from "react-loader-spinner";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useReduce } from "./reducer-context/Reducer-context";
@@ -19,23 +19,26 @@ import {
 } from "./pages";
 export default function App() {
   const { loading } = useReduce();
+  console.log("llllllllll",process.env.REACT_APP_backend_url)
   return (
     <div className="App">
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/video/:videoId" element={<VideoBlock />} />
-        <PrivateRoute path="/playlist" element={<Playlist />} />
-        <PrivateRoute path="/history" element={<History />} />
-        <PrivateRoute path="/liked" element={<Liked />} />
-        <PrivateRoute path="/user" element={<User />} />
-
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="*" element={<NotFound />} />
+        <Route element={<PrivateRoute />}>
+          <Route path="/playlist" element={<Playlist />} />
+          <Route path="/history" element={<History />} />
+          <Route path="/liked" element={<Liked />} />
+          <Route path="/user" element={<User />} /> 
+        </Route>
+       
       </Routes>
       {loading && (
         <div className="loader">
-          <Loader
+          <BallTriangle
             type="BallTriangle"
             color="green"
             height={100}

@@ -22,7 +22,7 @@ export function Signup() {
   async function signupHandler() {
     try {
       let response = await axios.post(
-        "https://videolib-demo-1.utpalpati.repl.co/signup",
+        `${process.env.REACT_APP_backend_url}/signup`,
         { user: { userName, email, password } }
       );
       if (response.status === 200) {

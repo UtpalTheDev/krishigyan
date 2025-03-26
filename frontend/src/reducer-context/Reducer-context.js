@@ -45,7 +45,7 @@ export function ReducerProvider({ children }) {
       try {
         dispatch({ type: "LOAD", payload: true });
         const videodata = await axios.get(
-          "https://videolib-demo-1.utpalpati.repl.co/video/"
+          `${process.env.REACT_APP_backend_url}/video/`
         );
         dispatch({
           type: "LOAD_VIDEODATA",
@@ -55,13 +55,13 @@ export function ReducerProvider({ children }) {
         if (isUserLogIn) {
           dispatch({ type: "LOAD", payload: true });
           const playlist = await axios.get(
-            "https://videolib-demo-1.utpalpati.repl.co/playlist/"
+            `${process.env.REACT_APP_backend_url}/playlist/`
           );
           const history = await axios.get(
-            "https://videolib-demo-1.utpalpati.repl.co/history/"
+            `${process.env.REACT_APP_backend_url}/history/`
           );
           const liked = await axios.get(
-            "https://videolib-demo-1.utpalpati.repl.co/liked/"
+            `${process.env.REACT_APP_backend_url}/liked/`
           );
 
           dispatch({

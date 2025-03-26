@@ -34,7 +34,7 @@ export function VideoBlock() {
               className="icon-button md"
               onClick={async () => {
                 let likedmsg = await liked_video_delete_call(
-                  "https://videolib-demo-1.utpalpati.repl.co/liked/",
+                  `${process.env.REACT_APP_backend_url}/liked/`,
                   { likedId: item },
                   dispatch
                 );
@@ -53,7 +53,7 @@ export function VideoBlock() {
         onClick={async () => {
           if (isUserLogIn) {
             let likedmsg = await liked_video_add_call(
-              "https://videolib-demo-1.utpalpati.repl.co/liked/",
+              `${process.env.REACT_APP_backend_url}/liked/`,
               { likedId: itempassed.id },
               dispatch
             );
@@ -131,7 +131,7 @@ export function VideoBlock() {
                             src={`https://i.ytimg.com/vi/${item.id}/mqdefault.jpg`}
                             onClick={() => {
                               history_video_add_call(
-                                "https://videolib-demo-1.utpalpati.repl.co/history/",
+                                `${process.env.REACT_APP_backend_url}/history/`,
                                 {
                                   historyId: item.id,
                                   lastseen: new Date()
@@ -190,7 +190,7 @@ function PlaylistModal({ setshowmodal, videoId }) {
                     key={item.id}
                     onClick={async () => {
                       let playlistmsg = await playlist_video_add_call(
-                        "https://videolib-demo-1.utpalpati.repl.co/playlist/video",
+                        `${process.env.REACT_APP_backend_url}/playlist/video`,
                         {
                           videoid: videoId,
                           playlistid: item.id
@@ -248,7 +248,7 @@ function PlaylistModal({ setshowmodal, videoId }) {
                 onClick={async () => {
                   if (newplaylist !== "") {
                     let playlistmsg = await playlist_add_call(
-                      "https://videolib-demo-1.utpalpati.repl.co/playlist/",
+                      `${process.env.REACT_APP_backend_url}/playlist/`,
                       {
                         playlistobj: {
                           id: uuid(),

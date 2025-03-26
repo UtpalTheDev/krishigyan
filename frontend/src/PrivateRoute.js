@@ -1,11 +1,13 @@
-import { Navigate, Link, Route } from "react-router-dom";
+import { Navigate, Outlet, useLocation } from "react-router-dom";
 import { useLogin } from "./reducer-context/LoginContext";
 
-export default function PrivateRoute({ path, ...props }) {
+export default function PrivateRoute() {
   const { isUserLogIn } = useLogin();
-  return isUserLogIn ? (
-    <Route {...props} path={path} />
-  ) : (
-    <Navigate state={{ from: path }} replace to="/login" />
-  );
+  const location = useLocation();
+  
+  if (!isUserLogIn) {
+    return <Navigate to="/login" state={{ from: location.pathname }} replace />;
+  }
+  
+  return <Outlet />;
 }
